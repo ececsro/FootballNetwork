@@ -34,24 +34,38 @@
 		</header>
 
 		<!-- Body de la pagina -->
-		
+		<!-- 
 		<h2>User</h2>
 		{{name}}
 		{{password}}
-		<form action="user/new" method="post">
-		<p>Name: </p>
-		<input type='text' name='name'/>
-		<p>Surname:</p>
-		<input type='text' name='surname'/>
-		<p>Position:</p>
-		<input type='text' name='position'/>
-		<p>Rating:</p>
-		<input type='text' name='rating'/>
-		<p>Team:</p>
-		<input type='text' name='team'/>
-
-		<input type='submit' value='send'/>
-	</form>
+		<div class="newPlayer">
+			<form action="user/new" method="post">
+				<p>Name: </p>
+				<input type='text' name='name'/>
+				<p>Surname:</p>
+				<input type='text' name='surname'/>
+				<p>Position:</p>
+				<input type='text' name='position'/>
+				<p>Rating:</p>
+				<input type='text' name='rating'/>
+				<p>Team:</p>
+				<input type='text' name='team'/>
+		
+				<input type='submit' value='send'/>
+			</form>
+		</div>
+		 -->
+		 <div class="newUser">
+			<form action="user/new" method="post">
+				<p>ID: </p>
+				<input type='text' name='id'/>
+				<p>Password:</p>
+				<input type='text' name='password'/>
+				
+		
+				<input type='submit' value='send'/>
+			</form>
+		</div>
 	</body>
 
 </html>

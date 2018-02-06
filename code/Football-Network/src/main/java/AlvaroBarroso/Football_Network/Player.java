@@ -11,7 +11,7 @@ public class Player {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
+	private String img;
 	private String name;
 	private String surname;
 	private String position;
@@ -19,19 +19,29 @@ public class Player {
 	private String team;
 	
 	
-	
-
 	public Player() {}
 	public Player(String name, String surname, String position, int rating, String team) {
 		super();
+		this.img= "null";
 		this.name = name;
 		this.surname = surname;
 		this.position = position;
 		this.rating = rating;
 		this.team = team;
 	}
-	
+	public Player(String img, String name, String surname, String position, int rating, String team) {
+		super();
+		this.img = img;
+		this.name = name;
+		this.surname = surname;
+		this.position = position;
+		this.rating = rating;
+		this.team = team;
+	}
 
+	public long getId() {
+		return id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -79,6 +89,12 @@ public class Player {
 	public String toString() {
 		return "Player [id=" + id + ", name=" + name + ", surname=" + surname + ", position=" + position + ", rating="
 				+ rating + ", team=" + team + "]";
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

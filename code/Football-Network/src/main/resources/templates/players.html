@@ -9,6 +9,7 @@
 
 	<title>Football Network</title>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="body.css">
 	<link rel="stylesheet" href="cabecera.css">
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
@@ -34,15 +35,24 @@
 		</header>
 
 		<!-- Body de la pagina -->
-		
 
+	 	 <!--  & permite mandar elementos html raw sin procesar por moustache (Interactivos) -->
+	 	 <table class="playerList">
+	 	 <tr>
+	 	 		<th class="tableTop">Name</th>
+			    <th class="tableTop">Surname</th> 
+			    <th class="tableTop">Position</th>
+			    <th class="tableTop">Rating</th>
+			    <th class="tableTop">Team</th>
+		    </tr>
+	 	 {{& playerTest}}
+	 	 </table>
 	</body>
-	<table>
-		{{#players}}
-		 <tr>
-		 <td>{{-index}}</td>
-		 <td>{{.}}</td>
-		 </tr>
-		 {{/players}}
-		 </table>
+	<script>
+	jQuery(document).ready(function($) {
+	    $(".playerRow").click(function() {
+	        window.location = $(this).data("href");
+	    });
+	});
+	</script>
 </html>
