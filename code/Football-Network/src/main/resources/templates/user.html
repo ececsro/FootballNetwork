@@ -9,8 +9,8 @@
 
 	<title>Football Network</title>
 
-	<link rel="stylesheet" href="body.css">
-	<link rel="stylesheet" href="cabecera.css">
+	<link rel="stylesheet" href="/body.css">
+	<link rel="stylesheet" href="/cabecera.css">
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
 
@@ -34,10 +34,8 @@
 		</header>
 
 		<!-- Body de la pagina -->
-		<!-- 
+		
 		<h2>User</h2>
-		{{name}}
-		{{password}}
 		<div class="newPlayer">
 			<form action="user/new" method="post">
 				<p>Name: </p>
@@ -50,22 +48,15 @@
 				<input type='text' name='rating'/>
 				<p>Team:</p>
 				<input type='text' name='team'/>
-		
+				<p>Contract:</p>
+				<p>Years:</p>
+				<input type='text' name='years'/>
+				<p>Money:</p>
+				<input type='text' name='money'/>
 				<input type='submit' value='send'/>
 			</form>
 		</div>
-		 -->
-		 <div class="newUser">
-			<form action="user/new" method="post">
-				<p>ID: </p>
-				<input type='text' name='id'/>
-				<p>Password:</p>
-				<input type='text' name='password'/>
-				
-		
-				<input type='submit' value='send'/>
-			</form>
-		</div>
+		 
 	</body>
 
 </html>

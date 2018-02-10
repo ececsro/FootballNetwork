@@ -35,21 +35,33 @@ public class SessionController {
 	private UserRepository 		userRepository;
 	@Autowired
 	private ScoutingRepository 	scoutingRepository;
+	@Autowired
+	private CommentRepository 	commentRepository;
+	@Autowired
+	private ContractRepository 	contractRepository;
+	User alvaro = new User("alvaro", "12345");
 	
 	@PostConstruct
 	public void init() {
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real");
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca");
-		playerRepository.save(cr7);
-		playerRepository.save(m10);
+		Contract con = new Contract(5,1900000);
+		cr7.setContract(con);
+		cr7 = playerRepository.save(cr7);
+		m10 = playerRepository.save(m10);
 		playerRepository.save(new Player("Gareth", "Bale", "RW", 89, "Real"));
 		playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
 		
-		userRepository.save(new User("alvaro", "12345"));
+		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
+		alvaro = userRepository.save(alvaro);
+		
 		List<Player> lista = new LinkedList<Player>();
 		lista.add(cr7);
 		lista.add(m10);
 		scoutingRepository.save(new Scouting(userRepository.getOne("alvaro"), lista ));
+		
+		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
+		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
 		
 	}
 	@RequestMapping(value = "/home")
@@ -84,9 +96,14 @@ public class SessionController {
 	}
 	@GetMapping(value = "/getplayer/{id}")
 	public String getPlayer(Model model, @PathVariable Long id) {
-		System.out.println("Players");
+		System.out.println("Players" + id);
 		Player p = playerRepository.findOne(id);
+		System.out.println(p.getName());
 		model.addAttribute("playerDisplay", displayPlayer(p));
+		System.out.println(proccessComments(p));
+		model.addAttribute("commentsTable", proccessComments(p));
+		model.addAttribute("Contract", proccessContract(p));
+		model.addAttribute("id", id);
 		return "playerDisplay";
 	}
 	@GetMapping(value = "/players")
@@ -102,6 +119,15 @@ public class SessionController {
 		model.addAttribute("playerDisplay", proccesPlayers(playerRepository.findByName(search)));
 		
 		return "playerDisplay";
+	}
+	@PostMapping(value = "/newcomment/{id}")
+	public String addComment(Model model,  @PathVariable Long id, String comment) {
+		System.out.println("New comment for:" + id + " -> " + comment);
+		Comment com = new Comment(alvaro.getId(),(int) 0, comment);
+		playerRepository.getOne(id).addComment(com);
+		commentRepository.save(com);
+		return getPlayer(model,id);
+		//return "/getplayer/"+id;
 	}
 
 	@RequestMapping("/scouting")
@@ -138,6 +164,7 @@ public class SessionController {
 		str = str + "</div>";
 		return str;
 	}
+	
 	private String proccesPlayer(Player p) {
 		String code = "";
 		code = code + " <td>" + p.getName()		+ 	"</td> ";
@@ -146,6 +173,18 @@ public class SessionController {
 		code = code + " <td>" + p.getRating()	+	"</td> ";
 		code = code + " <td>" + p.getTeam() 	+ 	"</td> ";
 		code = code + getScoutCheck(userRepository.findOne("alvaro"), p);
+		return code;
+	}
+	private String proccessContract(Player p) {
+		String code = "";
+		if(p.getContract()!=null) {
+		for(int i=1; i<=p.getContract().getYears(); i++) {
+			code = code + "<tr>";
+			code = code + "<td>" + i		+ 	"</td> ";
+			code = code + "<td>" + p.getContract().getMoney()	+ 	" € </td> ";
+			code = code + "</tr>";
+		}
+		}
 		return code;
 	}
 
@@ -178,17 +217,31 @@ public class SessionController {
 		return "cabecera.css";
 	}
 	*/
+	private String proccessComments(Player p){
+		String code = "";
+		for(Comment comment : p.getComments())
+		{
+			code = code + "<tr class=\"comment\" >";
+			code = code + "<td>" + "<a class=\"karma\">" + comment.getKarma() + "</a>" + "</td>" ;
+			code = code + "<td>" +  "<a class=\"author\">" + comment.getAuthor() + "</a>" +"</td>";
+
+			code = code + "<td>" + "<a class=\"text\">" + comment.getText() + "</a>"+"</td>";
+			code = code + "</tr>";
+		}
+		return code;
+	}
 	private String displayPlayer(Player p) {
 		String code="<div class=\"playerDisplay\">";
-		if(p.getImg()=="null") {
-			code = code +"<img class=\"pImg\" src=\"https://www.iconfinder.com/icons/357492/account_avatar_client_man_member_person_user_profile_icon\"></img>";
+		if(p.getImg().length()<5) {
+			code = code +"<img class=\"pImg\" src=\"https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-128.png\"></img>";
 		}else {
-			code = code +"<img class=\"pImg\" src=\" " + p.getImg() +"></img>";
+			code = code +"<img class=\"pImg\" src=\" " + p.getImg() +"\"></img>";
 		}
-		code = code + " <a class=\"pName\">" + p.getId() 		+ 	"</a> ";
-		code = code + " <a class=\"pSurname\">" + p.getSurname() 	+	"</a> ";
-		code = code + " <a class=\"pPosition\">" + p.getPosition()	+	"</a> ";
 		code = code + " <a class=\"pRating\">" + p.getRating()	+	"</a> ";
+		
+		code = code + " <a class=\"pName\">" + p.getName() 		+ 	"</a> ";
+		code = code + " <a class=\"pSurname\">" + p.getSurname() 	+	"</a> <br>";
+		code = code + " <a class=\"pPosition\">" + p.getPosition()	+	"</a>  ";		
 		code = code + " <a class=\"pTeam\">" + p.getTeam() 		+ 	"</a> ";
 		code = code + "</div>";
 		return code;

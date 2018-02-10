@@ -79,3 +79,76 @@ td{
 	padding: 5px 10px;
 	
 }
+.playerDisplay{
+	padding: 5% 5%;
+	align-self : center;
+	background: #f4e1d2;
+	font-size: 40px;
+	border: none;
+}
+.pImg{
+	height: 150px;
+	width: auto;
+}
+.pRating{
+	padding: 0% 10%;
+	font-size: 100px;
+	
+}
+.pName{
+	padding-left: 20px
+	font-size: 50px;
+	
+}
+.pSurname{
+	padding-left: 10px;
+	font-size: 50px;
+	
+}
+.pTeam{
+	padding-top: 70px;
+	padding-left: 70px;
+	font-size: 40px;
+}
+.pPosition{
+	padding-top: 70px;
+	padding-left: 30%;
+	font-size: 40px;
+	
+}
+.commentsList{
+	padding-top: 70px;
+	padding-left: 100px;
+}
+.comment{
+	
+}
+.newComment{
+		padding-top: 70px;
+	padding-left: 20%;
+	padding-bottom: 30px;
+}
+.newComment button {
+	align-self : center;
+	  padding: 6px 10px;
+	  background: space;
+	  font-size: 40px;
+	  border: 2px solid black;
+	  cursor: pointer;
+}
+.newComment input {
+	padding: 6px 10px;
+	align-self : center;
+	background: #f4e1d2;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.Contract{
+	position: absolute;
+	right: 5%;
+	z-index: 5;
+	top:150px;
+}
+
