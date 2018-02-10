@@ -37,7 +37,7 @@
 		
 		<h2>User</h2>
 		<div class="newPlayer">
-			<form action="user/new" method="post">
+			<form action="players/new" method="post">
 				<p>Name: </p>
 				<input type='text' name='name'/>
 				<p>Surname:</p>
@@ -45,14 +45,14 @@
 				<p>Position:</p>
 				<input type='text' name='position'/>
 				<p>Rating:</p>
-				<input type='text' name='rating'/>
+				<input type='number' name='rating'/>
 				<p>Team:</p>
 				<input type='text' name='team'/>
 				<p>Contract:</p>
 				<p>Years:</p>
-				<input type='text' name='years'/>
+				<input type='number' name='years'/>
 				<p>Money:</p>
-				<input type='text' name='money'/>
+				<input type='number' name='money'/>
 				<input type='submit' value='send'/>
 			</form>
 		</div>

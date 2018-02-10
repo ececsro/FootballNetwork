@@ -53,13 +53,13 @@ public class SessionController {
 		playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
 		
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
-		alvaro = userRepository.save(alvaro);
+		
 		
 		List<Player> lista = new LinkedList<Player>();
 		lista.add(cr7);
 		lista.add(m10);
-		scoutingRepository.save(new Scouting(userRepository.getOne("alvaro"), lista ));
-		
+		scoutingRepository.save(new Scouting(alvaro, lista ));
+		alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
 		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
 		
@@ -104,8 +104,41 @@ public class SessionController {
 		model.addAttribute("commentsTable", proccessComments(p));
 		model.addAttribute("Contract", proccessContract(p));
 		model.addAttribute("id", id);
+		model.addAttribute("scoutingDisplay", getScoutingDisplay(p, alvaro));
 		return "playerDisplay";
 	}
+	@GetMapping(value = "/scouting/add/{id}")
+	public String setScouting(Model model, @PathVariable Long id) {
+		
+		Player p = playerRepository.findOne(id);
+		System.out.println("Change state " + p.getName());
+		if(!isScouted(alvaro, p)) {
+			addToScouting(p, alvaro);
+		}else {
+			removeToScouting(p, alvaro);
+		}
+		return getPlayer(model,id);
+	}
+	private String getScoutingDisplay(Player p, User u) {
+		String code = "<img class=\"scoutIcon\" src=\"";
+		if(isScouted(u, p)) {
+			code = code + "/approved.png";
+		}else {
+			code = code + "/false.png";
+		}
+		code = code + "\" data-href=\"/scouting/add/" + p.getId() + "\" style=\"width: 50px;height: auto\"> </img>";
+		return code;
+	}
+	private void addToScouting(Player p, User u) {
+		scoutingRepository.findByUser(u).addPlayer(p);
+		userRepository.save(u);
+		//playerRepository.save(arg0)
+	}
+	private void removeToScouting(Player p, User u) {
+		scoutingRepository.findByUser(u).getPlayers().remove(p);
+		userRepository.save(u);
+	}
+	
 	@GetMapping(value = "/players")
 	public String getPlayers(Model model) {
 		System.out.println("Players");
@@ -129,7 +162,16 @@ public class SessionController {
 		return getPlayer(model,id);
 		//return "/getplayer/"+id;
 	}
-
+	@PostMapping(value = "/players/new")
+	public String newPlayer(Model model,@RequestParam  String name, String position, String surname, String team, int rating, int money, int years) {
+		Player newPlayer = new Player(name, surname, position, rating, team);
+		Contract con = new Contract(years, money);
+		newPlayer.setContract(con);
+		newPlayer = playerRepository.save(newPlayer);
+		System.out.println("new Player: " + newPlayer.toString());
+		
+		return getPlayers(model);
+	}
 	@RequestMapping("/scouting")
 	public String getScouting(Model model) {
 		System.out.println("Scouting");
@@ -193,9 +235,9 @@ public class SessionController {
 		code = code + " <td class=\"pScouting\" data-href= \"/addScouting/\" "+p.getId();
 		code = code + ">";
 		if(isScouted(s, p)) {
-			code = code + "<img class=\"imgScout\" src= \"approved.png\"></img>";
+			code = code + "<img class=\"imgScout\" src= \"/approved.png\"></img>";
 		}else {                 
-			code = code + "<img class=\"imgScout\" src= \"false.png\"></img>";
+			code = code + "<img class=\"imgScout\" src= \"/false.png\"></img>";
 		}
 		code = code + "</td>";
 		return code;
@@ -235,7 +277,7 @@ public class SessionController {
 		if(p.getImg().length()<5) {
 			code = code +"<img class=\"pImg\" src=\"https://cdn3.iconfinder.com/data/icons/gray-toolbar-3/512/user-128.png\"></img>";
 		}else {
-			code = code +"<img class=\"pImg\" src=\" " + p.getImg() +"\"></img>";
+			code = code +"<img class=\"pImg\" src=\"" + p.getImg() +"\"></img>";
 		}
 		code = code + " <a class=\"pRating\">" + p.getRating()	+	"</a> ";
 		

@@ -3,6 +3,7 @@ package AlvaroBarroso.Football_Network;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class Scouting {
 		this.id = id;
 	}
 
-	@OneToOne
+	@OneToOne (cascade = CascadeType.ALL)
 	private User user;
 	@OneToMany
 	private List<Player> players = new ArrayList<>();

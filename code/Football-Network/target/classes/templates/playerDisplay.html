@@ -37,6 +37,11 @@
 		<!-- Body de la pagina -->
 		
 		{{&playerDisplay}}
+		<div class="scoutingCheck">
+		<img class="scout" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-128.png" style="width: 50px;height: auto"> </img>
+		{{&scoutingDisplay}}
+		</div>
+		
 		<div class="Contract">
  	 	<table class="ContractList">
 	 	 <tr>
@@ -61,7 +66,7 @@
     </body>
     	<script>
 	jQuery(document).ready(function($) {
-	    $(".karma").click(function() {
+	    $(".scoutIcon").click(function() {
 	        window.location = $(this).data("href");
 	    });
 	});
