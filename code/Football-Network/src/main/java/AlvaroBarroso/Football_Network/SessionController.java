@@ -15,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -149,9 +150,8 @@ public class SessionController {
 	@PostMapping(value = "/players/search")
 	public String searchPlayer(Model model, String search) {
 		System.out.println("Searching for:" + search);
-		model.addAttribute("playerDisplay", proccesPlayers(playerRepository.findByName(search)));
-		
-		return "playerDisplay";
+		model.addAttribute("playerTest", proccesPlayers(playerRepository.findByName(search)));
+		return "players";
 	}
 	@PostMapping(value = "/newcomment/{id}")
 	public String addComment(Model model,  @PathVariable Long id, String comment) {
@@ -264,9 +264,10 @@ public class SessionController {
 		for(Comment comment : p.getComments())
 		{
 			code = code + "<tr class=\"comment\" >";
+			code = code + "<td>" + "<button class=\"upKarma\"   style=\"background-color:green; height: 40px; width: 40px\"   data-href=\"/player/upKarma/"  + comment.getId() + "/" + p.getId() +"\">"+ "</button>" + "</td>";
 			code = code + "<td>" + "<a class=\"karma\">" + comment.getKarma() + "</a>" + "</td>" ;
+			code = code + "<td>" + "<button class=\"downKarma\" style=\"background-color:red; height: 40px; width: 40px\" data-href=\"/player/downKarma/"+ comment.getId() + "/" + p.getId() +"\">" + "</button>" + "</td>";
 			code = code + "<td>" +  "<a class=\"author\">" + comment.getAuthor() + "</a>" +"</td>";
-
 			code = code + "<td>" + "<a class=\"text\">" + comment.getText() + "</a>"+"</td>";
 			code = code + "</tr>";
 		}
@@ -288,6 +289,23 @@ public class SessionController {
 		code = code + "</div>";
 		return code;
 	}
+	
+	@GetMapping("/player/upKarma/{id}/{pid}")
+	private String upKarma(Model model, @PathVariable Long id, @PathVariable Long pid ) {
+		Comment comment = commentRepository.getOne(id);
+		comment.setKarma(comment.getKarma()+1);
+		commentRepository.save(comment);
+		return getPlayer(model,pid);
+	}
+	@GetMapping("/player/downKarma/{id}/{pid}")
+	private String downKarma(Model model, @PathVariable Long id, @PathVariable Long pid) {
+		Comment comment = commentRepository.getOne(id);
+		comment.setKarma(comment.getKarma()-1);
+		commentRepository.save(comment);
+		return getPlayer(model,pid);
+	}
+	
+	//Mapeo de imagenes
 	@GetMapping("/approved.png")
 	public @ResponseBody byte[] getApprove() throws IOException {
 		File fi = new File("src/main/resources/assets/approved.png");
@@ -300,4 +318,5 @@ public class SessionController {
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}
+
 }

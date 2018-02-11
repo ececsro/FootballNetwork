@@ -9,7 +9,7 @@ Football Network es una red social que propone unir al publico general y los sco
 # Entidades
 - Usuario: El usuario podrá interactuar con los diferentes elementos propios de los jugadores (publicar comentarios, valorar jugadores, contactar...). 
 - Jugador: El jugador es un componente opcional del usuario, en el que se podra dar de alta como jugador para que otros usuarios puedan interactuar con su perfil.
-- Valoración: La valoración permite a los usuarios valorar positiva o negativamente a los jugadores con un sistema de "karma".
+- Valoración: La valoración permite a los usuarios valorar positiva o negativamente a los comentarios de los jugadores con un sistema de "karma".
 - Scouting: los usuarios disponen de la opción de añadir a jugadores a la lista de scouting en la que pueden recopilados a los jugadores que consideran más prometedores o que simplemente desean tener más a mano el acceso a sus perfiles.
 - Comentario: los usuarios pueden dejar un comentario en el perfil de los jugadores que puede visualizar el resto de los usuarios.
 
