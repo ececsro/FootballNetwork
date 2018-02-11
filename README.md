@@ -19,4 +19,13 @@ Football Network es una red social que propone unir al publico general y los sco
 - Álvaro Barroso Mato
     - Correo de la Universidad: a.barrosoma@alumnos.urjc.es
     - Correo personal :         alvarobm61@gmail.com
-    - Github:                   https://github.com/alvaroBarrosoMato 
+    - Github:                   https://github.com/alvaroBarrosoMato
+    
+# Fase 2
+ ![Pantalla de HOME](https://i.gyazo.com/ebb000909d46fe571c6818b1e5bfdbfb.png)
+ ![Pantalla de lista de Jugadores](https://i.gyazo.com/7844fd2d5ce1403fd95c98d1744b7b27.png)
+ ![Pantalla de Jugador](https://i.gyazo.com/f1a315290e26085db583d1a4f81ced1f.png)
+ ![Pantalla de Scouting](https://i.gyazo.com/14744a498fff550cfc03ef830bb7715d.png)
+ ![Modelo de Datos](https://i.gyazo.com/a2baf882dc712b94d68ba1067a99608f.png)
+ ![Diagrama de Navegación](/DiagramaPantallas.png)
+
