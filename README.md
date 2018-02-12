@@ -43,7 +43,7 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
  En esta pantalla se pueden consultar los diferentes jugadores presentes en la lista de scouting y se comporta de la misma manera que la pantalla de visualización de los jugadores.
  ![Pantalla de Creacion De Usuario](https://i.gyazo.com/08dbf75bf9f36ef8e89d6e0816ea8348.png)
  En esta interfaz se crean los diferentes perfiles de jugadores de los usuarios.
-    #Diagrama de Navegación
+## Diagrama de Navegación
  ![Diagrama de Navegación](/DiagramaPantallas.png)
-    #Modelo de Datos
+## Modelo de Datos
  ![Modelo de Datos](https://i.gyazo.com/a2baf882dc712b94d68ba1067a99608f.png)
