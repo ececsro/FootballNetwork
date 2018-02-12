@@ -47,3 +47,5 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
  ![Diagrama de Navegación](/DiagramaPantallas.png)
 ## Modelo de Datos
  ![Modelo de Datos](https://i.gyazo.com/a2baf882dc712b94d68ba1067a99608f.png)
+## Diagrama Entidad-Relacion
+ ![Modelo de Datos](/Entidad-Relacion.png)
