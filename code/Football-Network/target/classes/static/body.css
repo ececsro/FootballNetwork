@@ -157,4 +157,36 @@ td{
 	top:130px;
 	left: 26%;
 }
-
+.scoutIcon{
+	  cursor: pointer;
+}
+.newPlayer{
+	margin: 20px 20px;
+	text-align: center;
+}
+.playerOptions{
+	width: 50%;
+	margin-right: 0px;
+}
+.contractOptions{
+	position: absolute;
+	top: 140px;
+	left: 50%;
+	width: 50%;
+	margin-right: 0px;
+}
+.newPlayer p{
+	font:26px Arial, Helvetica, sans-serif;
+}
+.newPlayer input{
+	padding: 6px 10px;
+	align-self : center;
+	background: #f7e8dd;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.ContractTitle{
+		font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+}

@@ -35,25 +35,21 @@
 
 		<!-- Body de la pagina -->
 		
-		<h2>User</h2>
 		<div class="newPlayer">
 			<form action="players/new" method="post">
-				<p>Name: </p>
-				<input type='text' name='name'/>
-				<p>Surname:</p>
-				<input type='text' name='surname'/>
-				<p>Position:</p>
-				<input type='text' name='position'/>
-				<p>Rating:</p>
-				<input type='number' name='rating'/>
-				<p>Team:</p>
-				<input type='text' name='team'/>
-				<p>Contract:</p>
-				<p>Years:</p>
-				<input type='number' name='years'/>
-				<p>Money:</p>
-				<input type='number' name='money'/>
-				<input type='submit' value='send'/>
+				<div class="playerOptions">
+				<p>Name: <input type='text' name='name'/></p>
+				<p>Surname: <input type='text' name='surname'/></p>
+				<p>Position: <input type='text' name='position'/></p>
+				<p>Rating: <input type='number' name='rating'/></p>
+				<p>Team: <input type='text' name='team'/></p>
+				</div>
+				<div class="contractOptions">
+				<p class="ContractTitle">Contract:</p>
+				<p>Years: <input type='number' name='years'/></p>
+				<p>Money: <input type='number' name='money'/></p>
+				</div>
+				<input class="button" style="cursor: pointer; height: 70px;width : 300px; font-size: 40px" type='submit' value="CREATE"/>
 			</form>
 		</div>
 		 
