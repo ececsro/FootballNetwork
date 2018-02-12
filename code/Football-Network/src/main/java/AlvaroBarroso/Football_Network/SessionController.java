@@ -40,10 +40,11 @@ public class SessionController {
 	private CommentRepository 	commentRepository;
 	@Autowired
 	private ContractRepository 	contractRepository;
-	User alvaro = new User("alvaro", "12345");
+	User alvaro;
 	
 	@PostConstruct
 	public void init() {
+		alvaro = new User("alvaro", "12345");
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real");
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca");
 		Contract con = new Contract(5,1900000);
@@ -166,8 +167,10 @@ public class SessionController {
 	public String newPlayer(Model model,@RequestParam  String name, String position, String surname, String team, int rating, int money, int years) {
 		Player newPlayer = new Player(name, surname, position, rating, team);
 		Contract con = new Contract(years, money);
-		newPlayer.setContract(con);
+		newPlayer.setContract(contractRepository.save(con));
+		newPlayer.setUser(alvaro);
 		newPlayer = playerRepository.save(newPlayer);
+		
 		System.out.println("new Player: " + newPlayer.toString());
 		
 		return getPlayers(model);

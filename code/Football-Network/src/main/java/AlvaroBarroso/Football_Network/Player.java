@@ -30,7 +30,16 @@ public class Player {
 	
 	@OneToOne (cascade = CascadeType.ALL) 
 	private Contract contract;
+
+	@OneToOne
+	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Contract getContract() {
 		return contract;
 	}
