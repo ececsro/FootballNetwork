@@ -49,10 +49,10 @@ public class SessionController {
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca");
 		Contract con = new Contract(5,1900000);
 		cr7.setContract(con);
-		cr7 = playerRepository.save(cr7);
-		m10 = playerRepository.save(m10);
-		playerRepository.save(new Player("Gareth", "Bale", "RW", 89, "Real"));
-		playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
+		//cr7 = playerRepository.save(cr7);
+		//m10 = playerRepository.save(m10);
+		//playerRepository.save(new Player("Gareth", "Bale", "RW", 89, "Real"));
+		//playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
 		
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
 		
@@ -60,8 +60,8 @@ public class SessionController {
 		List<Player> lista = new LinkedList<Player>();
 		lista.add(cr7);
 		lista.add(m10);
-		scoutingRepository.save(new Scouting(alvaro, lista ));
-		alvaro = userRepository.save(alvaro);
+		//scoutingRepository.save(new Scouting(alvaro, lista ));
+		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
 		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
 		

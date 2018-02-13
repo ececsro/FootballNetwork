@@ -10,6 +10,7 @@ body{
 	margin:0;
 }
 table, th, td{
+	margin-top:40px;
 	margin-left:40px;
 	border: 2px solid;
 	border-color: lime;
