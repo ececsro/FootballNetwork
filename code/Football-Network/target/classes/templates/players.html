@@ -10,9 +10,6 @@
 	<title>Football Network</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="/body.css">
-	<link rel="stylesheet" href="/cabecera.css">
-	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 
 
 </head>
@@ -56,4 +53,269 @@
 	    });
 	});
 	</script>
+		<style>
+.header-basic {
+	background-color: #bc5a45;
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
+	padding: 20px 40px;
+	height: 80px;
+	box-sizing: border-box;
+}
+
+.header-basic .header-limiter {
+	max-width: 1200px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* Logo */
+
+.header-basic .header-limiter h1 {
+	float: left;
+	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	margin: 0;
+}
+
+.header-basic .header-limiter h1 span {
+	color: #000000;
+}
+
+/* enlaces de cabecera */
+
+.header-basic .header-limiter a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.header-basic .header-limiter nav{
+	font:16px Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	float: left;
+    padding-left: 100px;
+}
+
+.header-basic .header-limiter nav a{
+	display: inline-block;
+	padding: 0 5px;
+	text-decoration:none;
+	color: #ffffff;
+	font-size: 16px;
+	opacity: 0.9;
+}
+
+.header-basic .header-limiter nav a:hover{
+	opacity: 1;
+}
+
+/* For the headers to look good, be sure to reset the margin and padding of the body */
+
+body {
+	margin:0;
+	padding:0;
+}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+html{
+	background-color: #f4e1d2;
+}
+
+body{
+	font:14px/1.5 Arial, Helvetica, sans-serif;
+	padding:0;
+	margin:0;
+}
+table, th, td{
+	margin-top:40px;
+	margin-left:40px;
+	border: 2px solid;
+	border-color: lime;
+	border-collapse: collapse;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+tr:nth-child(even){
+	background-color: #dcd0c0;
+}
+
+th{
+	opacity: 1;
+	background-color: #f4f4f4;
+	height: 50px;
+	font: 40px Arial;
+}
+td{
+	height: 30px;
+	font: 20px Arial;
+	background-color: #f4f4f4;
+}
+.playerRow{
+	opacity: 0.7;
+	cursor: pointer;
+	
+}
+.playerRow:hover{
+	opacity: 1;
+}
+.tableTop{
+	background-color: red;
+	opacity: 1;
+	
+}
+.search-container button {
+	align-self : center;
+	  padding: 6px 10px;
+	  background: space;
+	  font-size: 40px;
+	  border: 2px solid black;
+	  cursor: pointer;
+}
+.search-container input {
+	padding: 6px 10px;
+	align-self : center;
+	background: #f4e1d2;
+	font-size: 40px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.search-container{
+	margin-left:30%;
+	margin-top:	10%;
+	width: 	60%;
+	height: 20%;
+	
+}
+.imgScout {
+	width: 50px;
+	height: auto;
+	padding: 5px 10px;
+	
+}
+.playerDisplay{
+	padding: 5% 5%;
+	align-self : center;
+	font-size: 40px;
+	border: none;
+}
+.pImg{
+	height: 150px;
+	width: auto;
+}
+.pRating{
+	padding: 0% 10%;
+	font-size: 100px;
+	
+}
+.pName{
+	padding-left: 20px
+	font-size: 50px;
+	
+}
+.pSurname{
+	padding-left: 10px;
+	font-size: 50px;
+	
+}
+.pTeam{
+	padding-top: 70px;
+	padding-left: 70px;
+	font-size: 40px;
+}
+.pPosition{
+	padding-top: 70px;
+	padding-left: 30%;
+	font-size: 40px;
+	
+}
+.commentsList{
+	padding-top: 70px;
+	padding-left: 100px;
+}
+.comment{
+	
+}
+.newComment{
+		padding-top: 70px;
+	padding-left: 20%;
+	padding-bottom: 30px;
+}
+.newComment button {
+	align-self : center;
+	  padding: 6px 10px;
+	  background: space;
+	  font-size: 40px;
+	  border: 2px solid black;
+	  cursor: pointer;
+}
+.newComment input {
+	padding: 6px 10px;
+	align-self : center;
+	background: #f4e1d2;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.Contract{
+	position: absolute;
+	right: 5%;
+	z-index: 5;
+	top:150px;
+}
+.scoutingCheck{
+	box-shadow: 2px 1px 5px grey;
+	position: absolute;
+	z-index: 5;
+	top:130px;
+	left: 26%;
+}
+.scoutIcon{
+	  cursor: pointer;
+}
+.newPlayer{
+	margin: 20px 20px;
+	text-align: center;
+}
+.playerOptions{
+	width: 50%;
+	margin-right: 0px;
+}
+.contractOptions{
+	position: absolute;
+	top: 140px;
+	left: 50%;
+	width: 50%;
+	margin-right: 0px;
+}
+.newPlayer p{
+	font:26px Arial, Helvetica, sans-serif;
+}
+.newPlayer input{
+	padding: 6px 10px;
+	align-self : center;
+	background: #f7e8dd;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.newPlayer select{
+	padding: 6px 10px;
+	align-self : center;
+	background: #f7e8dd;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.ContractTitle{
+		font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+}
+
+</style>
 </html>

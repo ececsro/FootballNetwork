@@ -1,87 +1,10 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Football Network</title>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-
-
-</head>
-
-	<body>
-
-		<header class="header-basic">
-
-			<div class="header-limiter">
-
-				<h1><a href="/home">Football  <span>Network</span></a></h1>
-
-				<nav>
-					<a href="/players">Players</a>
-					<a href="/scouting">Scouting</a>
-					<a href="/user">User</a>
-				</nav>
-			</div>
-
-		</header>
-
-		<!-- Body de la pagina -->
-		
-		{{&playerDisplay}}
-		<div class="scoutingCheck">
-		<img class="scout" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-128.png" style="width: 50px;height: auto"> </img>
-		{{&scoutingDisplay}}
-		<img class= "contact" src="/email.png" href="/contact" style="width: 50px;cursor: pointer;height: auto"></img>
-		</div>
-		
-		<div class="Contract">
- 	 	<table class="ContractList">
-	 	 <tr>
-	 	 		<th >Year</th>
-			    <th >Money</th> 
-		 </tr>
-		 {{& Contract}}
-		
-		</table>
-		</div>
-		<table class="commentsList">
-	 	 {{& commentsTable}}
-	 	 </table>
- 	 	
-		
-	 	  <div class="newComment">
-			<form action="/newcomment/{{&id}}" method="post">
-				<input type='text' name='comment'/>
-				<button type="submit" class="post">POST</button>
-			</form>
-		</div>
-    </body>
-    	<script>
-	jQuery(document).ready(function($) {
-	    $(".scoutIcon").click(function() {
-	        window.location = $(this).data("href");
-	    });
-	});
-	
-	jQuery(document).ready(function($) {
-	    $(".upKarma").click(function() {
-	        window.location = $(this).data("href");
-	    });
-	});
-	jQuery(document).ready(function($) {
-	    $(".downKarma").click(function() {
-	        window.location = $(this).data("href");
-	    });
-	});
-	</script>
-		<style>
+<body>
+	<p>Invalid credentials</p>
+	<a href="/login">Try again</a>
+</body>
+	<style>
 .header-basic {
 	background-color: #bc5a45;
 	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
@@ -347,3 +270,4 @@ td{
 
 </style>
 </html>
+

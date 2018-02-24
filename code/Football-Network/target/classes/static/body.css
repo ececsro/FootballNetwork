@@ -1,4 +1,4 @@
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
 html{
 	background-color: #f4e1d2;
@@ -180,6 +180,15 @@ td{
 	font:26px Arial, Helvetica, sans-serif;
 }
 .newPlayer input{
+	padding: 6px 10px;
+	align-self : center;
+	background: #f7e8dd;
+	font-size: 20px;
+	width: 60%;
+	border: none;
+	box-shadow: 2px 1px 5px grey;
+}
+.newPlayer select{
 	padding: 6px 10px;
 	align-self : center;
 	background: #f7e8dd;

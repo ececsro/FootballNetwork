@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties.Session;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -22,12 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 
 
 @Controller
 public class SessionController {
-	private String path = "http://127.0.0.1:8080/";
+	private String path = "https://localhost:8443/";
 	boolean logged = false;
 	
 	@Autowired
@@ -44,23 +48,23 @@ public class SessionController {
 	
 	@PostConstruct
 	public void init() {
-		alvaro = new User("alvaro", "12345");
+		alvaro = userRepository.findByName("alvaro");
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real");
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca");
 		Contract con = new Contract(5,1900000);
 		cr7.setContract(con);
-		//cr7 = playerRepository.save(cr7);
-		//m10 = playerRepository.save(m10);
-		//playerRepository.save(new Player("Gareth", "Bale", "RW", 89, "Real"));
-		//playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
+		cr7 = playerRepository.save(cr7);
+		m10 = playerRepository.save(m10);
+		playerRepository.save(new Player("Gareth", "Bale", "RW", 89, "Real"));
+		playerRepository.save(new Player("https://realsport101.com/wp-content/uploads/2017/10/Isco-NIF.png","Francisco", "Alarcón", "CAM", 86, "Real"));
 		
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
 		
-		
+		System.out.println(userRepository.findAll().toString());
 		List<Player> lista = new LinkedList<Player>();
 		lista.add(cr7);
 		lista.add(m10);
-		//scoutingRepository.save(new Scouting(alvaro, lista ));
+		scoutingRepository.save(new Scouting(alvaro, lista ));
 		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
 		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
@@ -68,26 +72,24 @@ public class SessionController {
 	}
 	@RequestMapping(value = "/home")
 	public String getHome(Model model) {
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			System.out.println("user   "+SecurityContextHolder.getContext().getAuthentication().getName());
+		}
 		System.out.println("Home");
-		//model.addAttribute("main", "Principal");
 		return "redirect:" + path;
 	}
+	
+	//User
 	
 	@RequestMapping(value = "/user")
 	public String getUser(Model model) {
 		System.out.println("User");
-		/*
-		//Check Login
-		if(!logged) {
-			model.addAttribute("main", "paco");
-			return "login";
-		}*/
+		
 		System.out.println(playerRepository.findAll().toString());
-		model.addAttribute("name", "Nombre");
-		model.addAttribute("password", "Apellido");
+		
 		return "user";
 	}
-	@RequestMapping("/user/new")
+	/*@RequestMapping("/user/new")
 	public String newPlayer(Model model, User user) {
 		//System.out.println(player.toString());
 		//repository.save(player);
@@ -95,7 +97,44 @@ public class SessionController {
 		System.out.println(user.toString());
 		userRepository.save(user);
 		return "redirect:"+ path + "/user";
-	}
+	}*/
+	
+	//Login
+	
+	/*
+    @PostMapping(value = "/login")
+    public String login(Model model, @RequestParam String username) {
+    	System.out.println(" / " + username);
+    	//System.out.println(ses.getId());
+    	return "redirect: /home";
+    }*/
+	/*
+	@PostMapping(value = "/login")
+    public String login(Model model, @RequestParam String username) {
+    	System.out.println(" / " + username);
+    	//System.out.println(ses.getId());
+    	return "redirect: /home";
+    }
+	
+	
+	@PostMapping(value = "/login")
+	public String login(Model model) {
+		System.out.println(" /  asdxczxc" );
+		return "redirect:" + "/home";
+		//return getPlayers(model);
+	}*/
+    @GetMapping("/login")
+    public String login() {
+    	return "login";
+    }
+    
+    @GetMapping("/loginerror")
+    public String loginerror() {
+    	return "loginerror";
+    }
+	
+	//Players
+	
 	@GetMapping(value = "/getplayer/{id}")
 	public String getPlayer(Model model, @PathVariable Long id) {
 		System.out.println("Players" + id);
@@ -106,45 +145,18 @@ public class SessionController {
 		model.addAttribute("commentsTable", proccessComments(p));
 		model.addAttribute("Contract", proccessContract(p));
 		model.addAttribute("id", id);
-		model.addAttribute("scoutingDisplay", getScoutingDisplay(p, alvaro));
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		model.addAttribute("scoutingDisplay", getScoutingDisplay(p,us));
 		return "playerDisplay";
 	}
-	@GetMapping(value = "/scouting/add/{id}")
-	public String setScouting(Model model, @PathVariable Long id) {
-		
-		Player p = playerRepository.findOne(id);
-		System.out.println("Change state " + p.getName());
-		if(!isScouted(alvaro, p)) {
-			addToScouting(p, alvaro);
-		}else {
-			removeToScouting(p, alvaro);
-		}
-		return getPlayer(model,id);
-	}
-	private String getScoutingDisplay(Player p, User u) {
-		String code = "<img class=\"scoutIcon\" src=\"";
-		if(isScouted(u, p)) {
-			code = code + "/approved.png";
-		}else {
-			code = code + "/false.png";
-		}
-		code = code + "\" data-href=\"/scouting/add/" + p.getId() + "\" style=\"width: 50px;height: auto\"> </img>";
-		return code;
-	}
-	private void addToScouting(Player p, User u) {
-		scoutingRepository.findByUser(u).addPlayer(p);
-		userRepository.save(u);
-		//playerRepository.save(arg0)
-	}
-	private void removeToScouting(Player p, User u) {
-		scoutingRepository.findByUser(u).getPlayers().remove(p);
-		userRepository.save(u);
-	}
-	
 	@GetMapping(value = "/players")
 	public String getPlayers(Model model) {
 		System.out.println("Players");
 		model.addAttribute("players", playerRepository.findAll());
+		System.out.println("hallo "+playerRepository.findAll().toString());
 		model.addAttribute("playerTest", proccesPlayers(playerRepository.findAll()));
 		return "players";
 	}
@@ -154,49 +166,23 @@ public class SessionController {
 		model.addAttribute("playerTest", proccesPlayers(playerRepository.findByName(search)));
 		return "players";
 	}
-	@PostMapping(value = "/newcomment/{id}")
-	public String addComment(Model model,  @PathVariable Long id, String comment) {
-		System.out.println("New comment for:" + id + " -> " + comment);
-		Comment com = new Comment(alvaro.getId(),(int) 0, comment);
-		playerRepository.getOne(id).addComment(com);
-		commentRepository.save(com);
-		return getPlayer(model,id);
-		//return "/getplayer/"+id;
-	}
 	@PostMapping(value = "/players/new")
 	public String newPlayer(Model model,@RequestParam  String name, String position, String surname, String team, int rating, int money, int years) {
 		Player newPlayer = new Player(name, surname, position, rating, team);
 		Contract con = new Contract(years, money);
 		newPlayer.setContract(contractRepository.save(con));
-		newPlayer.setUser(alvaro);
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		newPlayer.setUser(us);
 		newPlayer = playerRepository.save(newPlayer);
 		
 		System.out.println("new Player: " + newPlayer.toString());
-		
-		return getPlayers(model);
+
+		return "redirect:" + path + "getplayer/" + newPlayer.getId();
+		//return getPlayers(model);
 	}
-	@RequestMapping("/scouting")
-	public String getScouting(Model model) {
-		System.out.println("Scouting");
-		//getScoutingList(userRepository.findOne("alvaro"));
-		model.addAttribute("playerTest", proccesPlayers(getScoutingList(userRepository.findOne("alvaro"))));
-		//System.out.println(proccesPlayers(getScoutingList(userRepository.findOne("alvaro"))));
-		return "players";
-	}
-	
-	public List<Player> getScoutingList(User user){
-		System.out.println("Getting " + user.getId() + " scouted players.");
-		return scoutingRepository.findByUser(user).getPlayers();
-	}
-	/*
-	@RequestMapping(value = "/checkLogin")
-	public String checkLogin(@RequestParam String user, String password) {
-		usuario.setUser(user);
-		usuario.setPassword(password);
-		System.out.println("Succesfull login : " + "Usuario: " + usuario.getUser() + " - Password: " + usuario.getPassword());
-		logged = true;
-		return "user";
-	}*/
 	private String proccesPlayers(List<Player> players) {
 		String str = "<div class =  \"players\" >";
 		for(Player p: players) {
@@ -209,7 +195,6 @@ public class SessionController {
 		str = str + "</div>";
 		return str;
 	}
-	
 	private String proccesPlayer(Player p) {
 		String code = "";
 		code = code + " <td>" + p.getName()		+ 	"</td> ";
@@ -217,7 +202,11 @@ public class SessionController {
 		code = code + " <td>" + p.getPosition()	+	"</td> ";
 		code = code + " <td>" + p.getRating()	+	"</td> ";
 		code = code + " <td>" + p.getTeam() 	+ 	"</td> ";
-		code = code + getScoutCheck(userRepository.findOne("alvaro"), p);
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		code = code + getScoutCheck(us, p);
 		return code;
 	}
 	private String proccessContract(Player p) {
@@ -229,50 +218,6 @@ public class SessionController {
 			code = code + "<td>" + p.getContract().getMoney()	+ 	" € </td> ";
 			code = code + "</tr>";
 		}
-		}
-		return code;
-	}
-
-	private String getScoutCheck(User s, Player p) {
-		String code = "";
-		code = code + " <td class=\"pScouting\" data-href= \"/addScouting/\" "+p.getId();
-		code = code + ">";
-		if(isScouted(s, p)) {
-			code = code + "<img class=\"imgScout\" src= \"/approved.png\"></img>";
-		}else {                 
-			code = code + "<img class=\"imgScout\" src= \"/false.png\"></img>";
-		}
-		code = code + "</td>";
-		return code;
-	}
-	private boolean isScouted(User s, Player p) {
-		if(scoutingRepository.findByUser(s).getPlayers().contains(p)) {
-			return true;
-		}
-		return false;		
-	}
-
-	/*
-	@GetMapping(value = "/getplayer/body")
-	public String getBody(Model model) {
-		return "body.css";
-	}
-	@GetMapping(value = "/getplayer/cabecera")
-	public String getHeader(Model model) {
-		return "cabecera.css";
-	}
-	*/
-	private String proccessComments(Player p){
-		String code = "";
-		for(Comment comment : p.getComments())
-		{
-			code = code + "<tr class=\"comment\" >";
-			code = code + "<td>" + "<button class=\"upKarma\"   style=\"background-color:green; height: 40px; width: 40px\"   data-href=\"/player/upKarma/"  + comment.getId() + "/" + p.getId() +"\">"+ "</button>" + "</td>";
-			code = code + "<td>" + "<a class=\"karma\">" + comment.getKarma() + "</a>" + "</td>" ;
-			code = code + "<td>" + "<button class=\"downKarma\" style=\"background-color:red; height: 40px; width: 40px\" data-href=\"/player/downKarma/"+ comment.getId() + "/" + p.getId() +"\">" + "</button>" + "</td>";
-			code = code + "<td>" +  "<a class=\"author\">" + comment.getAuthor() + "</a>" +"</td>";
-			code = code + "<td>" + "<a class=\"text\">" + comment.getText() + "</a>"+"</td>";
-			code = code + "</tr>";
 		}
 		return code;
 	}
@@ -292,23 +237,177 @@ public class SessionController {
 		code = code + "</div>";
 		return code;
 	}
+	//Scouting
+	
+	@GetMapping(value = "/scouting/add/{id}")
+	public String setScouting(Model model, @PathVariable Long id) {
+		
+		Player p = playerRepository.findOne(id);
+		System.out.println("Change state " + p.getName());
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		if(!isScouted(us, p)) {
+			addToScouting(p, us);
+		}else {
+			removeToScouting(p, us);
+		}
+		return "redirect:" + path + "getplayer/" + id;
+		//return getPlayer(model,id);
+	}
+	private String getScoutingDisplay(Player p, User u) {
+		String code = "<img class=\"scoutIcon\" src=\"";
+		if(isScouted(u, p)) {
+			code = code + "/approved.png";
+		}else {
+			code = code + "/false.png";
+		}
+		code = code + "\" data-href=\"/scouting/add/" + p.getId() + "\" style=\"width: 50px;height: auto\"> </img>";
+		return code;
+	}
+	private void addToScouting(Player p, User u) {
+		if(scoutingRepository.findByUser(u)!=null) {
+			scoutingRepository.findByUser(u).addPlayer(p);
+			userRepository.save(u);
+		}else {
+			//scoutingRepository.findByUser(u).addPlayer(p);
+			//scoutingRepository.findByUser(u).setPlayers(new LinkedList<Player>());
+			/*List<Player> lista = new LinkedList<Player>();
+			lista.add(p);
+			Scouting sc = scoutingRepository.save(new Scouting(u, lista ));
+			*/
+			System.out.println("debug");
+			System.out.println(u.toString());
+			List<Player> lista = new LinkedList<Player>();
+			lista.add(p);
+			Scouting sc = new Scouting(u, lista );
+			sc.setId(2);
+			System.out.println(sc.toString());
+			scoutingRepository.save(sc);
+			//userRepository.save(u);
+		}
+
+		//playerRepository.save(arg0)
+	}
+	private void removeToScouting(Player p, User u) {
+		if(scoutingRepository.findByUser(u)!=null) {
+		}else {
+			/*Scouting scou = new Scouting();
+			scoutingRepository.save(scou);
+			List<Player> lista = new LinkedList<Player>();
+			lista.add(p);
+			scoutingRepository.save(new Scouting(u, lista ));*/
+		}
+		scoutingRepository.findByUser(u).getPlayers().remove(p);
+		userRepository.save(u);
+	}
+	@RequestMapping("/scouting")
+	public String getScouting(Model model) {
+		System.out.println("Scouting");
+		//getScoutingList(userRepository.findOne("alvaro"));
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		model.addAttribute("playerTest", proccesPlayers(getScoutingList(us)));
+		//System.out.println(proccesPlayers(getScoutingList(userRepository.findOne("alvaro"))));
+		return "players";
+	}
+	public List<Player> getScoutingList(User user){
+		System.out.println("Getting " + user.getId() + " scouted players.");
+		if(scoutingRepository.findByUser(user)!=null) {
+			return scoutingRepository.findByUser(user).getPlayers();
+		}else {
+			return new LinkedList<Player>();
+		}
+	}
+	private String getScoutCheck(User s, Player p) {
+		String code = "";
+		code = code + " <td class=\"pScouting\" data-href= \"/addScouting/\" "+p.getId();
+		code = code + ">";
+		if(isScouted(s, p)) {
+			code = code + "<img class=\"imgScout\" src= \"/approved.png\"></img>";
+		}else {                 
+			code = code + "<img class=\"imgScout\" src= \"/false.png\"></img>";
+		}
+		code = code + "</td>";
+		return code;
+	}
+	private boolean isScouted(User s, Player p) {
+		if(s == null) {
+			return false;
+		}else if(scoutingRepository.findByUser(s)!=null) {
+			if(scoutingRepository.findByUser(s).getPlayers().contains(p)) {
+				return true;
+			}
+		}
+		
+		return false;		
+	}
+
+	
+	//Comments
+	
+	@PostMapping(value = "/newcomment/{id}")
+	public String addComment(Model model,  @PathVariable Long id, String comment) {
+		User us = new User();
+		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		System.out.println("New comment for:" + id + " -> " + comment);
+		Comment com = new Comment(us.getName(),(int) 0, comment);
+		playerRepository.getOne(id).addComment(com);
+		commentRepository.save(com);
+
+		return "redirect:" + path + "/getplayer/" + id;
+		//return getPlayer(model,id);
+		//return "/getplayer/"+id;
+	}
+	private String proccessComments(Player p){
+		String code = "";
+		for(Comment comment : p.getComments())
+		{
+			code = code + "<tr class=\"comment\" >";
+			code = code + "<td>" + "<button class=\"upKarma\"   style=\"background-color:green; height: 40px; width: 40px\"   data-href=\"/player/upKarma/"  + comment.getId() + "/" + p.getId() +"\">"+ "</button>" + "</td>";
+			code = code + "<td>" + "<a class=\"karma\">" + comment.getKarma() + "</a>" + "</td>" ;
+			code = code + "<td>" + "<button class=\"downKarma\" style=\"background-color:red; height: 40px; width: 40px\" data-href=\"/player/downKarma/"+ comment.getId() + "/" + p.getId() +"\">" + "</button>" + "</td>";
+			code = code + "<td>" +  "<a class=\"author\">" + comment.getAuthor() + "</a>" +"</td>";
+			code = code + "<td>" + "<a class=\"text\">" + comment.getText() + "</a>"+"</td>";
+			code = code + "</tr>";
+		}
+		return code;
+	}
+	
+	
+	//Karma
 	
 	@GetMapping("/player/upKarma/{id}/{pid}")
 	private String upKarma(Model model, @PathVariable Long id, @PathVariable Long pid ) {
 		Comment comment = commentRepository.getOne(id);
 		comment.setKarma(comment.getKarma()+1);
 		commentRepository.save(comment);
-		return getPlayer(model,pid);
+
+		return "redirect:" + path + "getplayer/" + pid;
+		//return getPlayer(model,pid);
 	}
 	@GetMapping("/player/downKarma/{id}/{pid}")
 	private String downKarma(Model model, @PathVariable Long id, @PathVariable Long pid) {
 		Comment comment = commentRepository.getOne(id);
 		comment.setKarma(comment.getKarma()-1);
 		commentRepository.save(comment);
-		return getPlayer(model,pid);
+		return "redirect:" + path + "getplayer/" + pid;
+		//return getPlayer(model,pid);
 	}
+
+	
+
+	
+
 	
 	//Mapeo de imagenes
+	
+	
 	@GetMapping("/approved.png")
 	public @ResponseBody byte[] getApprove() throws IOException {
 		File fi = new File("src/main/resources/assets/approved.png");
@@ -318,6 +417,12 @@ public class SessionController {
 	@GetMapping("/false.png")
 	public @ResponseBody byte[] getFalse() throws IOException {
 		File fi = new File("src/main/resources/assets/false.png");
+		byte[] fileContent = Files.readAllBytes(fi.toPath());
+	    return fileContent;
+	}
+	@GetMapping("/email.png")
+	public @ResponseBody byte[] getMail() throws IOException {
+		File fi = new File("src/main/resources/assets/email.png");
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}

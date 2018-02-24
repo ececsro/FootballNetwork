@@ -24,7 +24,7 @@ public class Scouting {
 		this.id = id;
 	}
 
-	@OneToOne (cascade = CascadeType.ALL)
+	@OneToOne (cascade = CascadeType.MERGE)
 	private User user;
 	@OneToMany
 	private List<Player> players = new ArrayList<>();

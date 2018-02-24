@@ -31,7 +31,7 @@ public class Player {
 	@OneToOne (cascade = CascadeType.ALL) 
 	private Contract contract;
 
-	@OneToOne
+	@OneToOne //(cascade=CascadeType.ALL)
 	private User user;
 	
 	public User getUser() {

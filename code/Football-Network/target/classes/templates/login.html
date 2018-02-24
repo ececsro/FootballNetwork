@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 <html>
-<body>
 
-<form action="/checkLogin" method="post">
-  Crear nueva cuenta, {{main}}					<br>
-  <input type='text' name='user'/> 		<br>
-  <input type='text' name='password'/> 	<br>
-  <input type='submit' value='Guardar'/>
-</form>
-</body>
+
+
+	<form action="/login" method="post">
+		<label>User Name:</label><input type="text" name="username" /><br />
+		<label>Password:</label><input type="password" name="password" /><br />
+		<input type="submit" value="Sign In" /><br />
+	</form>
+
 </html>
