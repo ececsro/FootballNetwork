@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
@@ -35,6 +36,8 @@ public class SessionController {
 	boolean logged = false;
 	
 	@Autowired
+	private SmtpMailSender smtpMailSender;
+	@Autowired
 	private PlayerRepository 	playerRepository;
 	@Autowired
 	private UserRepository 		userRepository;
@@ -45,12 +48,13 @@ public class SessionController {
 	@Autowired
 	private ContractRepository 	contractRepository;
 	User alvaro;
-	
+	User user;
 	@PostConstruct
 	public void init() {
 		alvaro = userRepository.findByName("alvaro");
-		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real");
-		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca");
+		user = userRepository.findByName("user");
+		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
+		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca", user);
 		Contract con = new Contract(5,1900000);
 		cr7.setContract(con);
 		cr7 = playerRepository.save(cr7);
@@ -134,7 +138,14 @@ public class SessionController {
     }
 	
 	//Players
-	
+    @RequestMapping("/getplayer/{id}/contact")
+    public String contact(Model model, @PathVariable Long id) throws MessagingException {
+    	System.out.println("hola");
+    	String body = "Hola";
+    	String to = playerRepository.getOne(id).getUser().getEmail();
+    	smtpMailSender.send(to, "This is a test email", body);
+		return "redirect:" + path + "getplayer/" + id;
+    }
 	@GetMapping(value = "/getplayer/{id}")
 	public String getPlayer(Model model, @PathVariable Long id) {
 		System.out.println("Players" + id);

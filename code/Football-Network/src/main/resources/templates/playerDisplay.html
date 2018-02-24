@@ -38,7 +38,7 @@
 		<div class="scoutingCheck">
 		<img class="scout" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-128.png" style="width: 50px;height: auto"> </img>
 		{{&scoutingDisplay}}
-		<img class= "contact" src="/email.png" href="/contact" style="width: 50px;cursor: pointer;height: auto"></img>
+		<img class= "contact" src="/email.png" data-href="{{&id}}/contact" style="width: 50px;cursor: pointer;height: auto"></img>
 		</div>
 		
 		<div class="Contract">
@@ -77,6 +77,11 @@
 	});
 	jQuery(document).ready(function($) {
 	    $(".downKarma").click(function() {
+	        window.location = $(this).data("href");
+	    });
+	});
+	jQuery(document).ready(function($) {
+	    $(".contact").click(function() {
 	        window.location = $(this).data("href");
 	    });
 	});

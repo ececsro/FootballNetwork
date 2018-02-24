@@ -106,6 +106,16 @@ public class Player {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	public Player(String name, String surname, String position, int rating, String team, User user) {
+		super();
+		this.name = name;
+		this.img= "null";
+		this.surname = surname;
+		this.position = position;
+		this.rating = rating;
+		this.team = team;
+		this.user = user;
+	}
 	public String getPosition() {
 		return position;
 	}
