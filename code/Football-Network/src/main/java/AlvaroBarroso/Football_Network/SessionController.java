@@ -293,7 +293,7 @@ public class SessionController {
 			List<Player> lista = new LinkedList<Player>();
 			lista.add(p);
 			Scouting sc = new Scouting(u, lista );
-			sc.setId(2);
+			//sc.setId(2);
 			System.out.println(sc.toString());
 			scoutingRepository.save(sc);
 			//userRepository.save(u);
