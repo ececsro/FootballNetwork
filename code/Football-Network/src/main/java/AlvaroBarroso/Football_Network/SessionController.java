@@ -41,8 +41,7 @@ public class SessionController {
 	private PlayerRepository 	playerRepository;
 	@Autowired
 	private UserRepository 		userRepository;
-	@Autowired
-	private ScoutingRepository 	scoutingRepository;
+	
 	@Autowired
 	private CommentRepository 	commentRepository;
 	@Autowired
@@ -51,8 +50,8 @@ public class SessionController {
 	User user;
 	@PostConstruct
 	public void init() {
-		alvaro = userRepository.findByName("alvaro");
-		user = userRepository.findByName("user");
+		//alvaro = userRepository.findByName("alvaro");
+		//user = userRepository.findByName("user");
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca", user);
 		Contract con = new Contract(5,1900000);
@@ -65,10 +64,8 @@ public class SessionController {
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
 		
 		System.out.println(userRepository.findAll().toString());
-		List<Player> lista = new LinkedList<Player>();
-		lista.add(cr7);
-		lista.add(m10);
-		scoutingRepository.save(new Scouting(alvaro, lista ));
+		
+		
 		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
 		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
@@ -278,16 +275,17 @@ public class SessionController {
 		return code;
 	}
 	private void addToScouting(Player p, User u) {
-		if(scoutingRepository.findByUser(u)!=null) {
+		/*
+		if(.findByUser(u)!=null) {
 			scoutingRepository.findByUser(u).addPlayer(p);
 			userRepository.save(u);
 		}else {
 			//scoutingRepository.findByUser(u).addPlayer(p);
 			//scoutingRepository.findByUser(u).setPlayers(new LinkedList<Player>());
-			/*List<Player> lista = new LinkedList<Player>();
+			List<Player> lista = new LinkedList<Player>();
 			lista.add(p);
 			Scouting sc = scoutingRepository.save(new Scouting(u, lista ));
-			*/
+			
 			System.out.println("debug");
 			System.out.println(u.toString());
 			List<Player> lista = new LinkedList<Player>();
@@ -297,20 +295,25 @@ public class SessionController {
 			System.out.println(sc.toString());
 			scoutingRepository.save(sc);
 			//userRepository.save(u);
-		}
-
+		}*/
+		u.addPlayer(p);
+		userRepository.save(u);
 		//playerRepository.save(arg0)
 	}
 	private void removeToScouting(Player p, User u) {
+		/*
 		if(scoutingRepository.findByUser(u)!=null) {
 		}else {
-			/*Scouting scou = new Scouting();
+			Scouting scou = new Scouting();
 			scoutingRepository.save(scou);
 			List<Player> lista = new LinkedList<Player>();
 			lista.add(p);
-			scoutingRepository.save(new Scouting(u, lista ));*/
+			scoutingRepository.save(new Scouting(u, lista ));
 		}
 		scoutingRepository.findByUser(u).getPlayers().remove(p);
+		userRepository.save(u);
+		*/
+		u.removePlayer(p);
 		userRepository.save(u);
 	}
 	@RequestMapping("/scouting")
@@ -327,8 +330,8 @@ public class SessionController {
 	}
 	public List<Player> getScoutingList(User user){
 		System.out.println("Getting " + user.getId() + " scouted players.");
-		if(scoutingRepository.findByUser(user)!=null) {
-			return scoutingRepository.findByUser(user).getPlayers();
+		if(user.getPlayers()!=null) {
+			return user.getPlayers();
 		}else {
 			return new LinkedList<Player>();
 		}
@@ -348,8 +351,8 @@ public class SessionController {
 	private boolean isScouted(User s, Player p) {
 		if(s == null) {
 			return false;
-		}else if(scoutingRepository.findByUser(s)!=null) {
-			if(scoutingRepository.findByUser(s).getPlayers().contains(p)) {
+		}else if(s.getPlayers()!=null) {
+			if(s.getPlayers().contains(p)) {
 				return true;
 			}
 		}

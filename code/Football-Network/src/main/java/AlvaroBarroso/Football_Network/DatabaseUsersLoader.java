@@ -23,8 +23,8 @@ public class DatabaseUsersLoader {
     	multiUser.add("ROLE_USER");
     	multiUser.add("ROLE_ADMIN");
 
-    	userRepository.save(new User("alvarobm61@hotmail.es","user", "pass", singleUser));
-		userRepository.save(new User("alvarobm61@gmail.com", "alvaro", "brujula61", multiUser));
+    	//userRepository.save(new User("alvarobm61@hotmail.es","user", "pass", singleUser));
+		//userRepository.save(new User("alvarobm61@gmail.com", "alvaro", "brujula61", multiUser));
     }
 
 }
