@@ -3,19 +3,23 @@ package AlvaroBarroso.Football_Network;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.mail.MessagingException;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties.Session;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -33,10 +38,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 public class SessionController {
 	private String path = "https://localhost:8443/";
+	private String servicePath = "http://127.0.0.1:5/";
 	boolean logged = false;
-	
-	@Autowired
-	private SmtpMailSender smtpMailSender;
+
 	@Autowired
 	private PlayerRepository 	playerRepository;
 	@Autowired
@@ -50,6 +54,10 @@ public class SessionController {
 	User user;
 	@PostConstruct
 	public void init() {
+		
+		
+		
+		
 		//alvaro = userRepository.findByName("alvaro");
 		//user = userRepository.findByName("user");
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
@@ -136,11 +144,26 @@ public class SessionController {
 	
 	//Players
     @RequestMapping("/getplayer/{id}/contact")
-    public String contact(Model model, @PathVariable Long id) throws MessagingException {
-    	System.out.println("hola");
-    	String body = "Hola";
+    public String contact(Model model, @PathVariable Long id) {
+    	System.out.println("Contactando con :" + id);
+    	
+    	 RestTemplate rt = new RestTemplate();
+    	 String url="http://127.0.0.1:5/send";
+
+     	String to = playerRepository.getOne(id).getUser().getEmail();
+     	String playerTo = playerRepository.getOne(id).getName();
+     	String from = SecurityContextHolder.getContext().getAuthentication().getName();
+     	String data = "Hola me gustaria contactar con " + playerTo;
+     	
+     	System.out.println("Contactando con :" + to);
+     	
+    	 Email email = new Email(from, to, data);
+    	 rt.postForLocation(url, email);
+
+    	
+    	/*String body = "Hola";
     	String to = playerRepository.getOne(id).getUser().getEmail();
-    	smtpMailSender.send(to, "This is a test email", body);
+    	smtpMailSender.send(to, "This is a test email", body);*/
 		return "redirect:" + path + "getplayer/" + id;
     }
 	@GetMapping(value = "/getplayer/{id}")
