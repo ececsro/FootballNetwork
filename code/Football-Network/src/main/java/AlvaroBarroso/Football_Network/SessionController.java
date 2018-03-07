@@ -136,6 +136,19 @@ public class SessionController {
     public String login() {
     	return "login";
     }
+    @GetMapping("/register")
+    public String signup() {
+    	return "signup";
+    }
+    @PostMapping("/signup")
+    public String signupresult(Model model, @RequestParam  String email, String username, String password) {
+    	List<String> singleUser = new LinkedList<String>();
+    	singleUser.add("ROLE_USER");
+    	User user = new User(email, username, password, singleUser);
+    	System.out.println(user.toString());
+    	userRepository.save(user);
+    	return "redirect:" + path + "home";
+    }
     
     @GetMapping("/loginerror")
     public String loginerror() {
@@ -145,6 +158,7 @@ public class SessionController {
 	//Players
     @RequestMapping("/getplayer/{id}/contact")
     public String contact(Model model, @PathVariable Long id) {
+    	if(playerRepository.getOne(id).getUser().getEmail()!=null) {
     	System.out.println("Contactando con :" + id);
     	
     	 RestTemplate rt = new RestTemplate();
@@ -159,7 +173,9 @@ public class SessionController {
      	
     	 Email email = new Email(from, to, data);
     	 rt.postForLocation(url, email);
-
+    	}else {
+    		System.out.println("Player without email adress");
+    	}
     	
     	/*String body = "Hola";
     	String to = playerRepository.getOne(id).getUser().getEmail();

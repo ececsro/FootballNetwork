@@ -33,14 +33,13 @@
 
 		<!-- Body de la pagina -->
 		
-	<form class="loginform" action="/login" method="post">
+	<form class="loginform" action="/signup" method="post">
+		<label>Email:</label><input type="text" name="email" /><br />
 		<label>User Name:</label><input type="text" name="username" /><br />
 		<label>Password:</label><input type="password" name="password" /><br /><br />
-		<input class="submit" type="submit" value="Sign In" />
-		<a href="/register">Register</a><br />
+		<input class="submit" type="submit" value="Sign Up" /><br />
 	</form>
-	 
-	 
+		 
 	</body>
 	<style>
 .header-basic {
@@ -186,17 +185,6 @@ td{
 	  border: 2px solid black;
 	  cursor: pointer;
 	
-}
-.loginform a {
- text-decoration:  none;
-	align-self : center;
-	  padding: 6px 10px;
-	  background: space;
-	  font-size: 40px;
-	  border: 2px solid black;
-	  cursor: pointer;
-      color: black;
-	  
 }
 .loginform label{
 	align-self : center;

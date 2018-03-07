@@ -24,6 +24,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/players").permitAll();
         http.authorizeRequests().antMatchers("/approved.png").permitAll();
         http.authorizeRequests().antMatchers("/email.png").permitAll();
+        http.authorizeRequests().antMatchers("/register").permitAll();
+        http.authorizeRequests().antMatchers("/signup").permitAll();
         http.authorizeRequests().antMatchers("/false.png").permitAll();
         http.authorizeRequests().antMatchers("/getplayer/**").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
