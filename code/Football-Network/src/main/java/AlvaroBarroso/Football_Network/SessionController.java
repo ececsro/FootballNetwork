@@ -463,19 +463,19 @@ public class SessionController {
 	
 	@GetMapping("/approved.png")
 	public @ResponseBody byte[] getApprove() throws IOException {
-		File fi = new File("src/main/resources/assets/approved.png");
+		File fi = new File("src/main/resources/static/assets/approved.png");
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}
 	@GetMapping("/false.png")
 	public @ResponseBody byte[] getFalse() throws IOException {
-		File fi = new File("src/main/resources/assets/false.png");
+		File fi = new File("src/main/resources/static/assets/false.png");
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}
 	@GetMapping("/email.png")
 	public @ResponseBody byte[] getMail() throws IOException {
-		File fi = new File("src/main/resources/assets/email.png");
+		File fi = new File("src/main/resources/static/assets/email.png");
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}
