@@ -3,6 +3,7 @@ package AlvaroBarroso.Football_Network;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,8 +26,18 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(final HttpServletRequest request,
             final HttpServletResponse response, final Object handler,
             final ModelAndView modelAndView) throws Exception {
-
+		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
-    	modelAndView.addObject("token", token.getToken());    	
+		if (request.getAttribute("_csrf")==null) {
+			System.out.println("hola");
+		}
+		if (modelAndView==null) {
+			System.out.println("adios");
+		}
+		if(token.getToken() != null) {
+			System.out.println("token -- "+token.toString());
+			modelAndView.addObject("token", token.getToken());
+		}
+		
     }
 }

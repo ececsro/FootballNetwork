@@ -1,4 +1,5 @@
 AlvaroBarroso\Football_Network\CommentRepository.class
+AlvaroBarroso\Football_Network\CSRFHandlerConfiguration.class
 AlvaroBarroso\Football_Network\PlayerRepository.class
 AlvaroBarroso\Football_Network\Player.class
 AlvaroBarroso\Football_Network\DatabaseUsersLoader.class
@@ -11,4 +12,5 @@ AlvaroBarroso\Football_Network\UserRepositoryAuthenticationProvider.class
 AlvaroBarroso\Football_Network\ContractRepository.class
 AlvaroBarroso\Football_Network\Contract.class
 AlvaroBarroso\Football_Network\Comment.class
+AlvaroBarroso\Football_Network\CSRFHandlerInterceptor.class
 AlvaroBarroso\Football_Network\Email.class
