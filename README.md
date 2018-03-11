@@ -51,6 +51,6 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
  ![Diagrama Entidad-Relacion](/Entidad-Relacion.png)
  # Fase 2
 ## Diagrama de Navegación
- ![Diagrama de Navegación](/DiagramaPantallas.png)
+ ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
  ![Diagrama de Clases y Templates](https://i.gyazo.com/70eb3386bf7598a12627cf98f128e862.png)
