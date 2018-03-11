@@ -60,6 +60,7 @@ public class SessionController {
 		
 		//alvaro = userRepository.findByName("alvaro");
 		//user = userRepository.findByName("user");
+		/*
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca", user);
 		Contract con = new Contract(5,1900000);
@@ -72,7 +73,7 @@ public class SessionController {
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
 		
 		System.out.println(userRepository.findAll().toString());
-		
+		*/
 		
 		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
@@ -460,7 +461,7 @@ public class SessionController {
 	
 	//Mapeo de imagenes
 	
-	
+	/*
 	@GetMapping("/approved.png")
 	public @ResponseBody byte[] getApprove() throws IOException {
 		File fi = new File("src/main/resources/static/assets/approved.png");
@@ -479,5 +480,5 @@ public class SessionController {
 		byte[] fileContent = Files.readAllBytes(fi.toPath());
 	    return fileContent;
 	}
-
+	*/
 }
