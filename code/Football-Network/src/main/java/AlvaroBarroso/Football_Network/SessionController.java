@@ -37,8 +37,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class SessionController {
-	private String path = "https://localhost:8443/";
-	private String servicePath = "http://127.0.0.1:5/";
+	private String path = "https://192.168.56.1:8060/";
+	private String servicePath = "http://10.0.87.224:8060/";
 	boolean logged = false;
 
 	@Autowired
@@ -83,7 +83,7 @@ public class SessionController {
 	@RequestMapping(value = "/home")
 	public String getHome(Model model) {
 		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-			System.out.println("user   "+SecurityContextHolder.getContext().getAuthentication().getName());
+			//System.out.println("user   "+SecurityContextHolder.getContext().getAuthentication().getName());
 		}
 		System.out.println("Home");
 		return "redirect:" + path;
@@ -95,7 +95,7 @@ public class SessionController {
 	public String getUser(Model model) {
 		System.out.println("User");
 		
-		System.out.println(playerRepository.findAll().toString());
+		//System.out.println(playerRepository.findAll().toString());
 		
 		return "user";
 	}
@@ -146,7 +146,7 @@ public class SessionController {
     	List<String> singleUser = new LinkedList<String>();
     	singleUser.add("ROLE_USER");
     	User user = new User(email, username, password, singleUser);
-    	System.out.println(user.toString());
+    	//System.out.println(user.toString());
     	userRepository.save(user);
     	return "redirect:" + path + "home";
     }
@@ -159,23 +159,24 @@ public class SessionController {
 	//Players
     @RequestMapping("/getplayer/{id}/contact")
     public String contact(Model model, @PathVariable Long id) {
-    	if(playerRepository.getOne(id).getUser().getEmail()!=null) {
+    	
+    	if(playerRepository.getOne(id).getUser()!=null) {
     	System.out.println("Contactando con :" + id);
     	
     	 RestTemplate rt = new RestTemplate();
-    	 String url="http://127.0.0.1:5/send";
+    	 String url=servicePath+"send";
 
      	String to = playerRepository.getOne(id).getUser().getEmail();
      	String playerTo = playerRepository.getOne(id).getName();
      	String from = SecurityContextHolder.getContext().getAuthentication().getName();
      	String data = "Hola me gustaria contactar con " + playerTo;
      	
-     	System.out.println("Contactando con :" + to);
+     	//System.out.println("Contactando con :" + to);
      	
     	 Email email = new Email(from, to, data);
     	 rt.postForLocation(url, email);
     	}else {
-    		System.out.println("Player without email adress");
+    		System.out.println("Player without user linked");
     	}
     	
     	/*String body = "Hola";
@@ -187,9 +188,9 @@ public class SessionController {
 	public String getPlayer(Model model, @PathVariable Long id) {
 		System.out.println("Players" + id);
 		Player p = playerRepository.findOne(id);
-		System.out.println(p.getName());
+		//System.out.println(p.getName());
 		model.addAttribute("playerDisplay", displayPlayer(p));
-		System.out.println(proccessComments(p));
+		//System.out.println(proccessComments(p));
 		model.addAttribute("commentsTable", proccessComments(p));
 		model.addAttribute("Contract", proccessContract(p));
 		model.addAttribute("id", id);
@@ -204,13 +205,13 @@ public class SessionController {
 	public String getPlayers(Model model) {
 		System.out.println("Players");
 		model.addAttribute("players", playerRepository.findAll());
-		System.out.println("hallo "+playerRepository.findAll().toString());
+		//System.out.println("hallo "+playerRepository.findAll().toString());
 		model.addAttribute("playerTest", proccesPlayers(playerRepository.findAll()));
 		return "players";
 	}
 	@PostMapping(value = "/players/search")
 	public String searchPlayer(Model model, String search) {
-		System.out.println("Searching for:" + search);
+		//System.out.println("Searching for:" + search);
 		model.addAttribute("playerTest", proccesPlayers(playerRepository.findByName(search)));
 		return "players";
 	}
@@ -234,7 +235,7 @@ public class SessionController {
 	private String proccesPlayers(List<Player> players) {
 		String str = "<div class =  \"players\" >";
 		for(Player p: players) {
-			System.out.println(p.toString());
+			//System.out.println(p.toString());
 			str = str + " <tr class =\"playerRow\" data-href= \"/getplayer/" +p.getId() +"\" >";
 			str = str + proccesPlayer(p);
 			str = str + " </tr>";
@@ -291,7 +292,7 @@ public class SessionController {
 	public String setScouting(Model model, @PathVariable Long id) {
 		
 		Player p = playerRepository.findOne(id);
-		System.out.println("Change state " + p.getName());
+		//System.out.println("Change state " + p.getName());
 		User us = new User();
 		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
 			us = userRepository.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -414,7 +415,7 @@ public class SessionController {
 		playerRepository.getOne(id).addComment(com);
 		commentRepository.save(com);
 
-		return "redirect:" + path + "/getplayer/" + id;
+		return "redirect:" + path + "getplayer/" + id;
 		//return getPlayer(model,id);
 		//return "/getplayer/"+id;
 	}

@@ -1,0 +1,4 @@
+AlvaroBarroso\ContactService\Email.class
+AlvaroBarroso\ContactService\SmtpMailSender.class
+AlvaroBarroso\ContactService\App.class
+AlvaroBarroso\ContactService\Controller.class

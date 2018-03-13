@@ -29,13 +29,15 @@
 			</div>
 
 		</header>
-		<input type="hidden" name="_csrf" value="{{token}}"/>
+		
 		
 		<div class="search-container">
 		    <form method="post" action="players/search">
 		      <input type="text" placeholder="Search.." name="search">
 		      <button type="submit" class="search">GO</button>
+		      <input type="hidden" name="_csrf" value="{{token}}"/>
 		    </form>
+		    
   		</div>
 		
 		
