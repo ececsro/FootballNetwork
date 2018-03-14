@@ -38,7 +38,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Controller
 public class SessionController {
 	private String path = "https://192.168.56.1:8060/";
-	private String servicePath = "http://10.0.87.224:8060/";
+	private String servicePath = "http://10.0.2.15:8060/";
 	boolean logged = false;
 
 	@Autowired
@@ -60,7 +60,7 @@ public class SessionController {
 		
 		//alvaro = userRepository.findByName("alvaro");
 		//user = userRepository.findByName("user");
-		/*
+		
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca", user);
 		Contract con = new Contract(5,1900000);
@@ -73,7 +73,7 @@ public class SessionController {
 		//cr7.addComment(new Comment(alvaro.getId(),(int) 120, "El mejor jugador de la historia"));
 		
 		System.out.println(userRepository.findAll().toString());
-		*/
+		
 		
 		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));

@@ -50,6 +50,23 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
 ## Diagrama Entidad-Relacion
  ![Diagrama Entidad-Relacion](/Entidad-Relacion.png)
  # Fase 2
+ 
+## Despliegue en Servidor
+### Maquina Virtual
+Para comenzar con el despliegue es necesario conseguir un terminal en el que poder mantener el servidor de la aplicacion, para ello se usa una maquina virtual que llevará incorporado el SO Linux Server 16.04.4. Una vez instalado y configurado el SO se procede a la instalación de los elementos que necesitará la aplicación que no posee todavía el sistema:
+- Java
+- MySQL -> Crear schema de la base de datos que se utilizará.
+Una vez realizados estos cambios ya se podría utilizar la aplicación de manera local.
+### Instalación de Aplicación
+Previo al despliegue de la aplicación en la maquina virtual se realizan una serie de cambios en el codigo que permitirán su exportación:
+- Configurar las direcciones de servicio interno y del servidor (para obtener la ip usar IFCONFIG)
+- Instalar aplicaciones en Linux Server:
+    - Montar el usb que contiene las aplicaciones
+    - Copiar los datos a la carpeta destino
+### Detalles Finales
+- Configuración de la red de interconexión de la VM:
+ ![Configuracion de Red](https://i.gyazo.com/5e57c2f771b1000e0d18e2d46cc16134.png)
+- Crear script BASH para inicializar los dos componentes de la aplición al mismo tiempo
 ## Diagrama de Navegación
  ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
