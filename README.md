@@ -49,7 +49,7 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
  ![Modelo de Datos](https://i.gyazo.com/a2baf882dc712b94d68ba1067a99608f.png)
 ## Diagrama Entidad-Relacion
  ![Diagrama Entidad-Relacion](/Entidad-Relacion.png)
- # Fase 2
+ # Fase 3
  
 ## Despliegue en Servidor
 ### Maquina Virtual
