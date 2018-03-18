@@ -59,24 +59,24 @@ Para comenzar con el despliegue es necesario conseguir un terminal en el que pod
  - Montar una nueva maquina virtual desde Virtual Box.
  - Descargar Linux Server 16.04.4.
  - Inicializar con Linux Server 16.04.4.
-    1. Configuración durante el primer arranque de Linux Server 16.04.4.
-    1. Hostname: un nombre para reconocer la MV en la red.
-    1. User full name: el nombre del usuario: en mi caso "Alvaro Barroso".
-    1. Username: nombre de usuario: corto, minusculas. En mi caso "alvaro".
-    1. Password: la contraseña con la que se autenticará al usuario necesaria para arrancar el servidor y la aplicación.
-    1. Write partition changes to disk:  “Yes”.
-    1. Write to disk (again):  “Yes”.
-    1. Software selection: “standard system utilities” estará seleccionado por defecto. Pulsar intro.
-    1. GRUB boot loader: el seleccionado por defecto.
+    - Configuración durante el primer arranque de Linux Server 16.04.4.
+    - Hostname: un nombre para reconocer la MV en la red.
+    - User full name: el nombre del usuario: en mi caso "Alvaro Barroso".
+    - Username: nombre de usuario: corto, minusculas. En mi caso "alvaro".
+    - Password: la contraseña con la que se autenticará al usuario necesaria para arrancar el servidor y la aplicación.
+    - Write partition changes to disk:  “Yes”.
+    - Write to disk (again):  “Yes”.
+    - Software selection: “standard system utilities” estará seleccionado por defecto. Pulsar intro.
+    - GRUB boot loader: el seleccionado por defecto.
  - Ya se tiene instalado el SO en la MV.
 #### Instalación de Java
 En esta fase descargaremos e instalaremos la version de java que dara soporte a nuestra aplicación y servicio interno.
     - Inicializar el servidor
     - Comenzar secuencia de comandos:
-        1. sudo apt-get update  > Actualiza la lista de referencias apt-get
-        1. java -version > Comprueba que java no esta instalado
-        1. sudo apt-get install default-jre > instala el jre por defecto (en mi caso es 1.8.1.151)
-        1. java -version > Comprueba que java esta instalado
+        - "sudo apt-get update"  > Actualiza la lista de referencias apt-get
+        - "java -version" > Comprueba que java no esta instalado
+        - "sudo apt-get install default-jre" > instala el jre por defecto (en mi caso es 1.8.1.151)
+        - "java -version" > Comprueba que java esta instalado
 #### Instalacion de MySQL
 
 - MySQL -> Crear schema de la base de datos que se utilizará.
