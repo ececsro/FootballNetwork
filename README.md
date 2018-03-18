@@ -123,6 +123,7 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
         - cp /media/sdb1 /server
 - Crear script BASH para inicializar los dos componentes de la aplición al mismo tiempo
     - setup.sh
+    
     ![BASH](https://i.gyazo.com/eb680256bac0edf8a5930e5000fb4e4d.png)
     
 ### Inicializacion de la aplicacion
