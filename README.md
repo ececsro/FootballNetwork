@@ -109,11 +109,20 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
 - Instalar aplicaciones en Linux Server:
     - Montar el usb que contiene las aplicaciones
     - Copiar los datos a la carpeta destino
-### Detalles Finales
-- Configuración de la red de interconexión de la VM:
- ![Configuracion de Red](https://i.gyazo.com/5e57c2f771b1000e0d18e2d46cc16134.png)
+### Despliegue final
+- Instalar aplicaciones en Linux Server:
+    - Copiar ambos ficheros .jar (ContactService y FootballNetwork)
+    - Habilitar el usb en la MV.
+    - Montar el usb que contiene las aplicaciones.
+        - sudo fdisk \-l > muestra los dispositivos conectados
+        - buscar uno con caracteristicas como el usb que hemos conectado
+        ![Montar USB](https://i.gyazo.com/7ea0a822912d59d4afd9539126e42763.png)
+        - en mi caso /dev/sdb1
+        - pmount /dev/sdb1
+    - Copiar los datos a la carpeta destino
+        - cp /media/sdb1 /server
 - Crear script BASH para inicializar los dos componentes de la aplición al mismo tiempo
-
+    ![BASH](https://i.gyazo.com/eb680256bac0edf8a5930e5000fb4e4d.png)
 ## Diagrama de Navegación
  ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
