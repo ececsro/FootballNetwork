@@ -73,10 +73,10 @@ Para comenzar con el despliegue es necesario conseguir un terminal en el que pod
 En esta fase descargaremos e instalaremos la version de java que dara soporte a nuestra aplicación y servicio interno.
     - Inicializar el servidor
     - Comenzar secuencia de comandos:
-        - "sudo apt-get update"  > Actualiza la lista de referencias apt-get
-        - "java -version" > Comprueba que java no esta instalado
-        - "sudo apt-get install default-jre" > instala el jre por defecto (en mi caso es 1.8.1.151)
-        - "java -version" > Comprueba que java esta instalado
+        - sudo apt\-get update  > Actualiza la lista de referencias apt-get
+        - java \-version > Comprueba que java no esta instalado
+        - sudo apt-get install default-jre > instala el jre por defecto (en mi caso es 1.8.1.151)
+        - java \-version > Comprueba que java esta instalado
 #### Instalacion de MySQL
 
 - MySQL -> Crear schema de la base de datos que se utilizará.
