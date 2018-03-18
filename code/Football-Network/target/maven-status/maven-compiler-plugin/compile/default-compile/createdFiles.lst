@@ -5,12 +5,15 @@ AlvaroBarroso\Football_Network\Player.class
 AlvaroBarroso\Football_Network\DatabaseUsersLoader.class
 AlvaroBarroso\Football_Network\App.class
 AlvaroBarroso\Football_Network\UserRepository.class
+AlvaroBarroso\Football_Network\ScoutingController.class
 AlvaroBarroso\Football_Network\SessionController.class
 AlvaroBarroso\Football_Network\SecurityConfiguration.class
 AlvaroBarroso\Football_Network\User.class
+AlvaroBarroso\Football_Network\PlayerController.class
 AlvaroBarroso\Football_Network\UserRepositoryAuthenticationProvider.class
 AlvaroBarroso\Football_Network\ContractRepository.class
 AlvaroBarroso\Football_Network\Contract.class
 AlvaroBarroso\Football_Network\Comment.class
+AlvaroBarroso\Football_Network\CommentController.class
 AlvaroBarroso\Football_Network\CSRFHandlerInterceptor.class
 AlvaroBarroso\Football_Network\Email.class

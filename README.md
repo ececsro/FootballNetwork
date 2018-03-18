@@ -90,16 +90,18 @@ En esta fase descargaremos e instalaremos la version de java que dara soporte a 
     - show databases;
     - Create footballnetwork
  - Ya estaria todo lo relativo a la base de datos
-#### Configuracion de Maquina Virtual
+### Configuracion de Maquina Virtual
 Previo al despliegue de la aplicación en la maquina virtual se realizan una serie de cambios en el codigo que permitirán su exportación:
 - Configurar las direcciones de servicio interno y del servidor (para obtener la ip usar IFCONFIG)
     - En la maquina virtual introducir comando : ifconfig
     - Guardar dirección IP de la maquina virtual : En mi caso 10.0.2.15.
         - Modificar variable servicePath a > servicePath = "http://10.0.2.15:8060/".
 - Configuración de la red de interconexión de la VM:
+
  ![Configuracion de Red](https://i.gyazo.com/5e57c2f771b1000e0d18e2d46cc16134.png)
 - Encontrar la ip de referencia a la red de maquinas virtuales en el SO host:
     - ipconfig > introducir en caso de Windows
+    
     ![Configuracion de Red](https://i.gyazo.com/9e147532a3277b67cfa5292a911c0f36.png)
     - en mi caso 192.168.56.1 es la ip que hará referencia a la VM.
     - ifconfig > en caso de Linux
