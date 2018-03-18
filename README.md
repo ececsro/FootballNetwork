@@ -126,22 +126,22 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
     ![BASH](https://i.gyazo.com/eb680256bac0edf8a5930e5000fb4e4d.png)
     
 ### Inicializacion de la aplicacion
-    - cd al directorio donde se encuentre la aplicacion y el setup.sh
-    - chmod 754 ./setup.sh
-    - bash ./setup.sh
+- cd al directorio donde se encuentre la aplicacion y el setup.sh
+- chmod 754 ./setup.sh
+- bash ./setup.sh
 ## Servicio Interno
-    - Sistema de envio email
-    - Soporte gmail
-    - Envio sobre SMTP
-    ![Clase de envio de email](https://i.gyazo.com/561bf30232e6beea22715c5c150a9568.png)
-    - RestController
-    - Soporte de un solo comando
-        - send (POST)
-        - Cuerpo
-            - Email
-                - To
-                - From
-                - Msg
+- Sistema de envio email
+- Soporte gmail
+- Envio sobre SMTP
+![Clase de envio de email](https://i.gyazo.com/561bf30232e6beea22715c5c150a9568.png)
+- RestController
+- Soporte de un solo comando
+    - send (POST)
+    - Cuerpo
+        - Email
+            - To
+            - From
+            - Msg
 ## Diagrama de Navegación
  ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
