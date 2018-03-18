@@ -78,12 +78,32 @@ En esta fase descargaremos e instalaremos la version de java que dara soporte a 
     - sudo apt\-get install default\-jre > instala el jre por defecto (en mi caso es 1.8.1.151).
     - java \-version > Comprueba que java esta instalado.
 #### Instalacion de MySQL
-
-- MySQL -> Crear schema de la base de datos que se utilizará.
-Una vez realizados estos cambios ya se podría utilizar la aplicación de manera local.
-### Instalación de Aplicación
+ - Inicializar el servidor
+ - Comenzar secuencia de comandos:
+    - sudo apt\-get update  > Actualiza la lista de referencias apt-get.
+    - sudo apt\-get install mysql\-server > instala MySQLServer. Configuracion durante la instalacion:
+        - username : root
+        - password : brujula61
+ - Una vez instalado hay que ejecutar el programa, abrir los schemas y crear uno nuevo:
+    - mysql \-u root \-p
+    - introducir la contraseña
+    - show databases;
+    - Create footballnetwork
+ - Ya estaria todo lo relativo a la base de datos
+#### Configuracion de Maquina Virtual
 Previo al despliegue de la aplicación en la maquina virtual se realizan una serie de cambios en el codigo que permitirán su exportación:
 - Configurar las direcciones de servicio interno y del servidor (para obtener la ip usar IFCONFIG)
+    - En la maquina virtual introducir comando : ifconfig
+    - Guardar dirección IP de la maquina virtual : En mi caso 10.0.2.15.
+        - Modificar variable servicePath a > servicePath = "http://10.0.2.15:8060/".
+- Configuración de la red de interconexión de la VM:
+ ![Configuracion de Red](https://i.gyazo.com/5e57c2f771b1000e0d18e2d46cc16134.png)
+- Encontrar la ip de referencia a la red de maquinas virtuales en el SO host:
+    - ipconfig > introducir en caso de Windows
+    ![Configuracion de Red](https://i.gyazo.com/9e147532a3277b67cfa5292a911c0f36.png)
+    - en mi caso 192.168.56.1 es la ip que hará referencia a la VM.
+    - ifconfig > en caso de Linux
+    
 - Instalar aplicaciones en Linux Server:
     - Montar el usb que contiene las aplicaciones
     - Copiar los datos a la carpeta destino

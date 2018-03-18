@@ -15,9 +15,9 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class PlayerController {
 		//Remote
-		//private String path = "https://192.168.56.1:8060/";
+		private String path = "https://192.168.56.1:8060/";
 		//Local
-		private String path = "https://localhost:8443/";
+		//private String path = "https://localhost:8443/";
 		
 	private String servicePath = "http://10.0.2.15:8060/";
 	
