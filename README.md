@@ -122,7 +122,13 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
     - Copiar los datos a la carpeta destino
         - cp /media/sdb1 /server
 - Crear script BASH para inicializar los dos componentes de la aplición al mismo tiempo
+    - setup.sh
     ![BASH](https://i.gyazo.com/eb680256bac0edf8a5930e5000fb4e4d.png)
+    
+### Inicializacion de la aplicacion
+    - cd al directorio donde se encuentre la aplicacion y el setup.sh
+    - chmod 754 ./setup.sh
+    - bash ./setup.sh
 ## Diagrama de Navegación
  ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
