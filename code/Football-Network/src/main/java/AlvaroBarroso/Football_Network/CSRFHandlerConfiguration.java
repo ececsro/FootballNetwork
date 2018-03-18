@@ -28,8 +28,8 @@ class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 	          new AntPathRequestMatcher("/logout"),
 	          new AntPathRequestMatcher("/signup"),
 	          new AntPathRequestMatcher("/register"),
-	          new AntPathRequestMatcher("/newcomment/**"),
-	          new AntPathRequestMatcher("/getplayer/**"),
+	          new AntPathRequestMatcher("/comment/**"),
+	          new AntPathRequestMatcher("/player/**"),
 	          new AntPathRequestMatcher("/"),
 	          
 	    };

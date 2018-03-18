@@ -53,7 +53,30 @@ Uno de los puntos principales de esta interfaz es la presencia de una casilla qu
  
 ## Despliegue en Servidor
 ### Maquina Virtual
-Para comenzar con el despliegue es necesario conseguir un terminal en el que poder mantener el servidor de la aplicacion, para ello se usa una maquina virtual que llevará incorporado el SO Linux Server 16.04.4. Una vez instalado y configurado el SO se procede a la instalación de los elementos que necesitará la aplicación que no posee todavía el sistema:
+Para comenzar con el despliegue es necesario conseguir un terminal en el que poder mantener el servidor de la aplicacion, para ello se usa una maquina virtual que llevará incorporado el SO Linux Server 16.04.4.
+#### Instalacion de Linux Server
+ - Descargar Virtual Box.
+ - Montar una nueva maquina virtual desde Virtual Box.
+ - Descargar Linux Server 16.04.4.
+ - Inicializar con Linux Server 16.04.4.
+    - Configuración durante el primer arranque de Linux Server 16.04.4.
+    - Hostname: un nombre para reconocer la MV en la red.
+    - User full name: el nombre del usuario: en mi caso "Alvaro Barroso".
+    - Username: nombre de usuario: corto, minusculas. En mi caso "alvaro".
+    - Password: la contraseña con la que se autenticará al usuario necesaria para arrancar el servidor y la aplicación.
+    - Write partition changes to disk:  “Yes”.
+    - Write to disk (again):  “Yes”.
+    - Software selection: “standard system utilities” estará seleccionado por defecto. Pulsar intro.
+    - GRUB boot loader: el seleccionado por defecto.
+ - Ya se tiene instalado el SO en la MV.
+#### Instalación de Java
+En esta fase descargaremos e instalaremos la version de java que dara soporte a nuestra aplicación y servicio interno.
+    - Inicializar el servidor
+    - Comenzar secuencia de comandos:
+        - sudo apt-get update  > Actualiza la lista de referencias apt-get
+        - java -version > Comprueba que java no esta instalado
+        - sudo apt-get install default-jre > instala el jre por defecto (en mi caso es 1.8.1.151)
+        - java -version > Comprueba que java esta instalado
 - Java
 - MySQL -> Crear schema de la base de datos que se utilizará.
 Una vez realizados estos cambios ya se podría utilizar la aplicación de manera local.
@@ -67,6 +90,7 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
 - Configuración de la red de interconexión de la VM:
  ![Configuracion de Red](https://i.gyazo.com/5e57c2f771b1000e0d18e2d46cc16134.png)
 - Crear script BASH para inicializar los dos componentes de la aplición al mismo tiempo
+
 ## Diagrama de Navegación
  ![Diagrama de Navegación](https://i.gyazo.com/a4c883477b921fd2d530f450a75234e6.png)
 ## Diagrama de Clases y Templates
