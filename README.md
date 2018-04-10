@@ -148,3 +148,81 @@ Previo al despliegue de la aplicación en la maquina virtual se realizan una ser
 ## Diagrama de Clases y Templates
  ![Diagrama de Clases y Templates](https://i.gyazo.com/70eb3386bf7598a12627cf98f128e862.png)
 # Fase 4
+## Instalacion de vagrant
+  Para comenzar la instalación de Vagrant se comenzará por su descarga, en este caso de la versión de windows ( [descargar](https://releases.hashicorp.com/vagrant/2.0.3/vagrant_2.0.3_x86_64.msi?_ga=2.64933999.115064628.1521550726-2022707724.1521550726)). Una vez descargado se procede a su instalación.
+  En esta fase se comienza con la separación de las partes de la aplicación en diferentes maquinas, para ello se elabora para empezar un pequeño esquema que describe como se distribullen las direcciones IP de los distintos elementos.
+   ![Diagrama IPs](https://raw.githubusercontent.com/alvaroBarrosoMato/FootballNetwork/master/IPDiagram.png)
+   Una vez establecido como se organizarán las IPs ya se puede proceder al montaje de la VagrantBox.
+- Se comienza creando un directorio en el lugar del host donde se desee montar el sistema. En mi caso: 
+
+        C:\Users\alvar\Desktop\DAD\Vagrant
+ - Una vez creado el directorio se posiciona en él y se abre la Windows PowerShell:
+
+        Mayus + click derecho -> abrir ventana de Windows PowerShell aquí.
+ - Se crea el VagrantFile:
+
+        vagrant init
+    Este es el resultado deseado, en el cual confirma la creación del vagrantfile.
+![vagrant init](https://i.gyazo.com/620e189ec7faf0c022e59d7140a14005.png)
+ - A continuacion se procede a la edición del vagrantfile para cumplir los requisitos del usuario.
+## Vagrantfile
+En mi caso el vagrantfile se encarga de montar las diferentes maquinas en una VagrantBox, de esta manera me permite configurarlas y aprovisionarlas a todas a la vez y en un mismo espacio, asi como arrancarlas y cerrarlas al mismo tiempo.
+
+        # -*- mode: ruby -*-
+        # vi: set ft=ruby :
+
+        Vagrant.configure("2") do |config|
+          config.vm.define "host" do |host|
+            host.vm.box = "ubuntu/trusty64"
+            host.vm.network "private_network", ip: "192.168.10.21"
+            host.vm.hostname = "host"
+            host.vm.provision "shell", inline: <<-SHELL
+                echo    Comenzando con la instalacion de java
+                sudo apt-get update
+                sudo apt-get install -y default-jdk
+                sudo apt-get install -y default-jre
+                echo    Instalacion finalizada
+            SHELL
+          end
+
+          config.vm.define "si" do |si|
+            si.vm.box = "ubuntu/trusty64"
+            si.vm.network "private_network", ip: "192.168.10.22"
+            si.vm.hostname = "si"
+            si.vm.provision "shell", inline: <<-SHELL
+                echo    Comenzando con la instalacion de java
+                sudo apt-get update
+                sudo apt-get install -y default-jdk
+                sudo apt-get install -y default-jre
+                echo    Instalacion finalizada
+               sudo echo "192.168.10.21 host" | sudo tee -a /etc/hosts
+            SHELL
+            end
+
+            config.vm.define "database" do |database|
+              database.vm.box = "ubuntu/trusty64"
+              database.vm.network "private_network", ip: "192.168.10.23"
+              database.vm.hostname = "database"
+              database.vm.provision "shell", inline: <<-SHELL
+                echo    Comenzando con la instalacion de java
+                sudo apt-get update
+                sudo apt-get install -y default-jdk
+                sudo apt-get install -y default-jre
+                echo    Instalacion finalizada
+               sudo echo "192.168.10.21 host" | sudo tee -a /etc/hosts
+            SHELL
+        end
+        config.vm.define "hostBU" do |hostBU|
+            hostBU.vm.box = "ubuntu/trusty64"
+            hostBU.vm.network "private_network", ip: "192.168.10.24"
+            hostBU.vm.hostname = "host"
+            hostBU.vm.provision "shell", inline: <<-SHELL
+                echo    Comenzando con la instalacion de java
+                sudo apt-get update
+                sudo apt-get install -y default-jdk
+                sudo apt-get install -y default-jre
+                echo    Instalacion finalizada
+            SHELL
+          end
+        end
+
