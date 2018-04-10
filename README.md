@@ -226,3 +226,29 @@ En mi caso el vagrantfile se encarga de montar las diferentes maquinas en una Va
           end
         end
 
+En mi VagrantFile se configuran 4 maquinas en una VagrantBox con sus corresponidentes direcciones IP. Adicionalmente se las aprovisiona:
+Mediante la provisión se permite la ejecución de un script BASH cada vez que la maquina se levante en un nuevo host. Esta funcionalidad permite la instalación de java en nuestro caso de manera rapida y automatica en todas las maquinas que lo requieren.
+## Levantar el sistema
+Una vez realizados estos cambios ya solo queda levantar el sistema. Para ello ejecutar en la consola:
+
+        vagrant up
+La creación de las maquinas llevará un tiempo pero una vez finalizado ya se tendrán 4 maquinas con sus correspondientes jre y jdk instalados. 
+Tras la creación de las maquinas es turno de configurar cada maquina de manera individual:
+### Sistema Interno
+Para acceder a esta maquina se usa:
+
+    vagrant ssh si
+Una vez ejecutado este comando nos encontramos en la maquina
+Desde el SO host copiamos el archivo .jar que corresponde al servicio interno en la carpeta contenedora de la vagrantBox (la que contiene el vagrantfile), en mi caso: 
+
+    C:\Users\alvar\Desktop\DAD\Vagrant
+![vagrant init](https://i.gyazo.com/7274f1b5433521bd47e93541337ce8d3.png)
+Esta carpeta funcionará como una carpeta compartida entre todas las maquinas del sistema .
+Desde la ventana de comandos se ejecuta el archivo mediante:
+
+    java -jar nombredelarchivo.jar
+
+En este momento el Servicio Interno ya esta operativo.
+
+
+
