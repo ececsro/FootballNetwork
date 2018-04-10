@@ -39,9 +39,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class SessionController {
 	
 	//Remote
-	private String path = "https://192.168.56.1:8060/";
+	//private String path = "https://192.168.56.1:8060/";
 	//Local
-	//private String path = "https://localhost:8443/";
+	private String path = "./";
 
 	
 	

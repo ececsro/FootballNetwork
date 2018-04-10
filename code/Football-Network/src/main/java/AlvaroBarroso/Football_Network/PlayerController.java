@@ -3,6 +3,8 @@ package AlvaroBarroso.Football_Network;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +17,21 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class PlayerController {
 		//Remote
-		private String path = "https://192.168.56.1:8060/";
+		//private String path = "https://192.168.56.1:8060/";
 		//Local
-		//private String path = "https://localhost:8443/";
+		private String path = "./";
 		
-	private String servicePath = "http://10.0.2.15:8060/";
+	private String servicePath = "http://192.168.10.22:8060/";
 	
 	@Autowired
-	private PlayerRepository 	playerRepository;
-	@Autowired
-	private UserRepository 		userRepository;
-	
-	@Autowired
-	private CommentRepository 	commentRepository;
-	@Autowired
-	private ContractRepository 	contractRepository;
+		private PlayerRepository 	playerRepository;
+		@Autowired
+		private UserRepository 		userRepository;
+		
+		@Autowired
+		private CommentRepository 	commentRepository;
+		@Autowired
+		private ContractRepository 	contractRepository;
     @GetMapping("/player/{id}/contact")
 	  	public String contact(Model model, @PathVariable Long id) {
 	    	
@@ -57,7 +59,9 @@ public class PlayerController {
 	    	smtpMailSender.send(to, "This is a test email", body);*/
 			return "redirect:" + path + "player/" + id;
 	    }
-		@GetMapping(value = "/player/{id}")
+		
+    @GetMapping(value = "/player/{id}")
+    @Cacheable(cacheNames="player", key="#id")
 		public String getPlayer(Model model, @PathVariable Long id) {
 			System.out.println("Players" + id);
 			Player p = playerRepository.findOne(id);
@@ -75,6 +79,7 @@ public class PlayerController {
 			return "playerDisplay";
 		}
 		@GetMapping(value = "/player")
+	    @Cacheable(cacheNames="player")
 		public String getPlayers(Model model) {
 			System.out.println("Players");
 			model.addAttribute("players", playerRepository.findAll());
@@ -89,6 +94,7 @@ public class PlayerController {
 			return "players";
 		}
 		@PostMapping(value = "/player")
+		@CacheEvict(cacheNames="player", allEntries=false)
 		public String newPlayer(Model model,@RequestParam  String name, String position, String surname, String team, int rating, int money, int years) {
 			Player newPlayer = new Player(name, surname, position, rating, team);
 			Contract con = new Contract(years, money);
