@@ -252,8 +252,6 @@ En este momento el Servicio Interno ya esta operativo.
 
 ### Base de Datos
 Para el sistema de las bases de datos utilizaremos replicación de tipo Maestro/Esclavo, según este metodo una de las bases de datos funcionará como maestro(realizando escrituras y lecturas) y otra como esclavo(solo aceptando lecturas).
-### Base de Datos
-Para el sistema de las bases de datos utilizaremos replicación de tipo Maestro/Esclavo, según este metodo una de las bases de datos funcionará como maestro(realizando escrituras y lecturas) y otra como esclavo(solo aceptando lecturas).
 #### Maestro:
 Para acceder a esta maquina se usa:
 
@@ -325,4 +323,58 @@ Tras ello guardamos la base de datos en un fichero exportable (en este caso en l
     mysqldump -u root -p --opt newdatabase > /vagrant/newdatabase.sql
     mysql -u root -p
     UNLOCK TABLES;
+#### Esclavo:
+Para acceder a esta maquina se usa:
+
+    vagrant ssh databaseBU
+
+una vez dentro se procede a descargar los datos de mysql-server:
+
+    sudo apt-get update
+    sudo apt-get install mysql-server
+como contraseña: 
+
+    brujula61
+nos aseguramos de que este correctamente instalado
+
+    sudo mysql_secure_installation
+
+una vez instalado mysql-server se procede a configurar la VM para aceptar el sistema de maestro esclavo. Comenzamos por cambiar de directorio al propio de mysql:
+
+    cd /vagrant/etc/mysql/
+
+una vez en del directorio se procede a la configuración del fichero my.cnf que contiene toda la configuración del servicio mysql.
+
+    sudo chmod +rwx my.cnf
+    sudo nano my.cnf
+Configuraciones necesarias: descomentar las siguientes lineas o añadirlas directamente:
+
+    server-id               = 2
+    relay-log               = /var/log/mysql/mysql-relay-bin.log
+    log_bin                 = /var/log/mysql/mysql-bin.log
+    binlog_do_db            = footballnetwork
+    
+tras configurar el fichero lo cerramos mediante ctrl+x, guardamos y procedemos a introducir el siguiente comando en la shell:
+
+    sudo service mysql restart
+    mysql -u root -p
+    
+introducimos la contraseña y procedemos a confgurar la base de datos dentro de mysql:
+procedemos a identificar al host en la tabla de usuarios de mysql:
+
+    CREATE USER 'host'@'%' IDENTIFIED BY 'brujula61';
+    GRANT REPLICATION SLAVE ON *.* TO 'host'@'%' IDENTIFIED BY 'brujula61';
+    flush privileges;
+
+Una vez introducido el usuario host se procede a configurar la maquina slave en mysql:
+
+    CHANGE MASTER TO MASTER_HOST='192.168.10.23',
+    MASTER_USER='slave',
+    MASTER_PASSWORD='brujula61',
+    MASTER_LOG_FILE='mysql-bin.000001',
+    MASTER_LOG_POS=  107;
+    START SLAVE;
+    SHOW SLAVE STATUS\G
+este ultimo comando muestra las estadisticas de uso del esclavo que deberian de parecer asi.
+ ![Slave status](https://i.gyazo.com/884b18988a4d7cdd392b0b621bdbe42b.png)
 
