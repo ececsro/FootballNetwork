@@ -250,5 +250,79 @@ Desde la ventana de comandos se ejecuta el archivo mediante:
 
 En este momento el Servicio Interno ya esta operativo.
 
+### Base de Datos
+Para el sistema de las bases de datos utilizaremos replicación de tipo Maestro/Esclavo, según este metodo una de las bases de datos funcionará como maestro(realizando escrituras y lecturas) y otra como esclavo(solo aceptando lecturas).
+### Base de Datos
+Para el sistema de las bases de datos utilizaremos replicación de tipo Maestro/Esclavo, según este metodo una de las bases de datos funcionará como maestro(realizando escrituras y lecturas) y otra como esclavo(solo aceptando lecturas).
+#### Maestro:
+Para acceder a esta maquina se usa:
 
+    vagrant ssh database
+
+una vez dentro se procede a descargar los datos de mysql-server:
+
+    sudo apt-get update
+    sudo apt-get install mysql-server
+como contraseña: 
+
+    brujula61
+nos aseguramos de que este correctamente instalado
+
+    sudo mysql_secure_installation
+
+una vez instalado mysql-server se procede a configurar la VM para aceptar el sistema de maestro esclavo. Comenzamos por cambiar de directorio al propio de mysql:
+
+    cd /vagrant/etc/mysql/
+    
+una vez en del directorio se procede a la configuración del fichero my.cnf que contiene toda la configuración del servicio mysql.
+
+    sudo chmod +rwx my.cnf
+    sudo nano my.cnf
+Configuraciones necesarias: descomentar las siguientes lineas o añadirlas directamente:
+
+    server-id               = 1
+    sync_binlog             = 1
+    max-binlog-size         = 500M
+    log_bin                 = /var/log/mysql/mysql-bin.log
+    binlog_do_db            = footballnetwork
+
+tras configurar el fichero lo cerramos mediante ctrl+x, guardamos y procedemos a introducir el siguiente comando en la shell:
+
+    sudo service mysql restart
+    mysql -u root -p
+    
+introducimos la contraseña y procedemos a confgurar la base de datos dentro de mysql:
+La siguiente secuencia de instrucciones mysql crea un usuario "slave" asignado a cualquier ip ("%") con la contraseña de la base de datos y le concede permisos en toda la base de datos.
+
+    CREATE USER 'slave'@'%' IDENTIFIED BY 'brujula61';
+    GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%' IDENTIFIED BY 'brujula61';
+    flush privileges;
+    
+Tras crear al usuario que identificará a slave procedemos a identificar al host:
+
+    CREATE USER 'host'@'%' IDENTIFIED BY 'brujula61';
+    GRANT REPLICATION SLAVE ON *.* TO 'host'@'%' IDENTIFIED BY 'brujula61';
+    flush privileges;
+
+una vez creados los usuarios se procede a la habilitación de la replicación de las bases de datos, para ello se utiliza la siguiente secuencia:
+
+    USE footballnetwork;
+    FLUSH TABLES WITH READ LOCK;
+    SHOW MASTER STATUS;
+Muestra la siguiente tabla que tendremos que tener en cuenta a la hora de poner a punto el esclavo:
+
+    mysql> SHOW MASTER STATUS;
+    +------------------+----------+------------------+------------------+
+    | File             | Position | Binlog_Do_DB     | Binlog_Ignore_DB |
+    +------------------+----------+------------------+------------------+
+    | mysql-bin.000001 |      107 | footballnetwork  |                  |
+    +------------------+----------+------------------+------------------+
+    1 row in set (0.00 sec)
+Es conveniente apuntar o guardar los datos de la tabla.
+Tras ello guardamos la base de datos en un fichero exportable (en este caso en la carpeta vagrant compartida para evitar mover ficheros de manera externa).
+
+    exit;
+    mysqldump -u root -p --opt newdatabase > /vagrant/newdatabase.sql
+    mysql -u root -p
+    UNLOCK TABLES;
 

@@ -11,7 +11,7 @@ timeout server 5000
 timeout client 5000
 
 listen master
-bind 192.168.10.30:3306
+bind 192.168.10.23:3306
 mode tcp
 timeout client 10800s
 timeout server 10800s
@@ -21,7 +21,7 @@ balance roundrobin
 server databaseBU 192.168.10.23:3306 check
 
 listen slave
-bind 192.168.10.30:3307
+bind 192.168.10.25:3306
 mode tcp
 timeout client 10800s
 timeout server 10800s
