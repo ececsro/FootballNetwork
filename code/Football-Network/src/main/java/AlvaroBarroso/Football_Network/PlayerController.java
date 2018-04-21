@@ -57,11 +57,10 @@ public class PlayerController {
 	    	/*String body = "Hola";
 	    	String to = playerRepository.getOne(id).getUser().getEmail();
 	    	smtpMailSender.send(to, "This is a test email", body);*/
-			return "redirect:" + path + "player/" + id;
+			return "redirect:" + "https://192.168.10.20/" + "player/" + id;
 	    }
 		
     @GetMapping(value = "/player/{id}")
-    @Cacheable(cacheNames="player", key="#id")
 		public String getPlayer(Model model, @PathVariable Long id) {
 			System.out.println("Players" + id);
 			Player p = playerRepository.findOne(id);
@@ -94,7 +93,7 @@ public class PlayerController {
 			return "players";
 		}
 		@PostMapping(value = "/player")
-		@CacheEvict(cacheNames="player", allEntries=false)
+		@CacheEvict(cacheNames="player")
 		public String newPlayer(Model model,@RequestParam  String name, String position, String surname, String team, int rating, int money, int years) {
 			Player newPlayer = new Player(name, surname, position, rating, team);
 			Contract con = new Contract(years, money);

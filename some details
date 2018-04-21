@@ -1,0 +1,124 @@
+global
+log 127.0.0.1 local0 notice
+user haproxy
+group haproxy
+
+defaults
+log global
+retries 2
+timeout connect 3000
+timeout server 5000
+timeout client 5000
+
+listen master
+bind 192.168.10.30:3306
+mode tcp
+timeout client 10800s
+timeout server 10800s
+option tcpka
+option mysql-check user haproxy_check
+balance roundrobin
+server databaseBU 192.168.10.23:3306 check
+
+listen slave
+bind 192.168.10.30:3307
+mode tcp
+timeout client 10800s
+timeout server 10800s
+option tcpka
+option mysql-check user haproxy_check
+balance roundrobin
+server databaseBU 192.168.10.25:3306 check
+
+listen stats
+bind 0.0.0.0:80
+mode http
+stats enable
+stats uri /haproxy?stats
+
+CREATE USER 'root'@'192.168.10.21' IDENTIFIED BY 'brujula61';
+CREATE USER 'root'@'192.168.10.24' IDENTIFIED BY 'brujula61';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.10.21' IDENTIFIED BY 'brujula61' WITH GRANT OPTION;
+
+DROP USER '192.168.10.21@'192.168.10.21';
+
+mysql -u root -p -e "INSERT INTO mysql.user (Host, User) values ('192.168.10.30','haproxy'); FLUSH PRIVILEGES;"
+mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.10.30' IDENTIFIED BY 'brujula61' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'haproxy_root'@'192.168.10.20' IDENTIFIED BY 'brujula61' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+
+server-id=1
+log-bin=mysql-bin
+sync_binlog=1
+max-binlog-size=500M
+expire_logs_days=4
+innodb_flush_log_at_trx_commit=1
+
+
+server-id=2
+relay-log=mysqld-relay-bin
+max-relay-log-size=500M
+relay_log_purge=1
+
+
+CREATE USER 'host'@'%' IDENTIFIED BY 'brujula61';
+GRANT ALL PRIVILEGES ON *.* TO 'host'@'%' IDENTIFIED BY 'brujula61' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+
+
+GRANT REPLICATION SLAVE ON *.* TO 'host'@'192.168.10.21' IDENTIFIED BY 'brujula61';
+flush privileges;
+
+
+CREATE USER 'slave'@'192.168.10.25' IDENTIFIED BY 'brujula61';
+GRANT REPLICATION SLAVE ON *.* TO 'slave'@'192.168.10.25' IDENTIFIED BY 'brujula61';
+flush privileges;
+
+CREATE USER 'slave'@'%' IDENTIFIED BY 'brujula61';
+GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%' IDENTIFIED BY 'brujula61';
+flush privileges;
+
+mysqldump -u root -p footballnetwork > /vagrant/footballnetwork.sql
+
+mysql -u root -p footballnetwork < /vagrant/footballnetwork.sql
+
+
+CHANGE MASTER TO MASTER_HOST='192.168.10.23',
+MASTER_USER='slave',
+MASTER_PASSWORD='brujula61',
+MASTER_LOG_FILE='mysql-bin.000002',
+MASTER_LOG_POS=931,
+MASTER_PORT=3306;
+
+
+
+<dependency>
+<groupId>com.fasterxml.jackson.core</groupId>
+<artifactId>jackson-databind</artifactId>
+<version>2.5.3</version>
+</dependency>
+<dependency>
+<groupId>com.fasterxml.jackson.datatype</groupId>
+<artifactId>jackson-datatype-jsr310</artifactId>
+<version>2.5.3</version>
+</dependency>
+<dependency>
+<groupId>org.springframework.session</groupId>
+<artifactId>spring-session</artifactId>
+</dependency>
+<dependency>
+<groupId>com.hazelcast</groupId>
+<artifactId>hazelcast</artifactId>
+<version>3.9.3</version>
+</dependency>
+<dependency>
+<groupId>com.hazelcast</groupId>
+<artifactId>hazelcast-spring</artifactId>
+<version>${hazelcast.version}</version>
+</dependency>
+<dependency>
+<groupId>com.hazelcast</groupId>
+<artifactId>hazelcast-wm</artifactId>
+<version>${hazelcast.version}</version>
+</dependency>
+

@@ -64,7 +64,7 @@ public class SessionController {
 		
 		//alvaro = userRepository.findByName("alvaro");
 		//user = userRepository.findByName("user");
-		
+		/*
 		Player cr7 = new Player("Cristiano", "Ronaldo", "LW", 95, "Real", alvaro);
 		Player m10 = new Player("Lionel", "Messi", "RW", 93, "Barca", user);
 		Contract con = new Contract(5,1900000);
@@ -82,7 +82,7 @@ public class SessionController {
 		//alvaro = userRepository.save(alvaro);
 		//playerRepository.getOne((long) 1).addComment(new Comment("alvaro",(int) 120, "El mejor jugador de la historia"));
 		//playerRepository.getOne((long) 1).addComment(new Comment("paco",(int) 120, "El mejor"));
-		
+		*/
 	}
 	@RequestMapping(value = "/home")
 	public String getHome(Model model) {

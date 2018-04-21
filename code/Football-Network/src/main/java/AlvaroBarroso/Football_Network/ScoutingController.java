@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ScoutingController {
 		//Remote
-		//private String path = "https://192.168.56.1:8060/";
+		//private String pathClear = "https://192.168.10.20:8060/";
 		//Local
 		private String path = "./";
 
@@ -27,6 +28,7 @@ public class ScoutingController {
 	
 
 	@GetMapping(value = "/scouting/{id}")
+	@CacheEvict(cacheNames="player")
 	public String setScouting(Model model, @PathVariable Long id) {
 		
 		Player p = playerRepository.findOne(id);
@@ -40,9 +42,10 @@ public class ScoutingController {
 		}else {
 			removeToScouting(p, us);
 		}
-		return "redirect:" + path + "player/" + id;
+		return "redirect:" + "https://192.168.10.20/" + "player/" + id;
 		//return getPlayer(model,id);
 	}
+
 	private void addToScouting(Player p, User u) {
 		/*
 		if(.findByUser(u)!=null) {

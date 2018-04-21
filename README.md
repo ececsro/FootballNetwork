@@ -234,7 +234,7 @@ Una vez realizados estos cambios ya solo queda levantar el sistema. Para ello ej
         vagrant up
 La creación de las maquinas llevará un tiempo pero una vez finalizado ya se tendrán 4 maquinas con sus correspondientes jre y jdk instalados. 
 Tras la creación de las maquinas es turno de configurar cada maquina de manera individual:
-### Sistema Interno
+### Servicio Interno
 Para acceder a esta maquina se usa:
 
     vagrant ssh si
