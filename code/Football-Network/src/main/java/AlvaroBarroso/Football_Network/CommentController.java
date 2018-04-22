@@ -33,7 +33,7 @@ public class CommentController {
 		playerRepository.getOne(id).addComment(com);
 		commentRepository.save(com);
 
-		return "redirect:" + path + "player/" + id;
+		return "redirect:" + "https://192.168.10.20/" + "player/" + id;
 		//return getPlayer(model,id);
 		//return "/getplayer/"+id;
 	}
@@ -45,7 +45,7 @@ public class CommentController {
 		comment.setKarma(comment.getKarma()+1);
 		commentRepository.save(comment);
 
-		return "redirect:" + path + "player/" + pid;
+		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
 		//return getPlayer(model,pid);
 	}
 	@GetMapping("/player/downKarma/{id}/{pid}")
@@ -53,7 +53,7 @@ public class CommentController {
 		Comment comment = commentRepository.getOne(id);
 		comment.setKarma(comment.getKarma()-1);
 		commentRepository.save(comment);
-		return "redirect:" + path + "player/" + pid;
+		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
 		//return getPlayer(model,pid);
 	}
 
