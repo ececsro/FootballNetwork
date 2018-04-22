@@ -378,3 +378,210 @@ Una vez introducido el usuario host se procede a configurar la maquina slave en 
 este ultimo comando muestra las estadisticas de uso del esclavo que deberian de parecer asi.
  ![Slave status](https://i.gyazo.com/884b18988a4d7cdd392b0b621bdbe42b.png)
 
+Llegados a este punto las maquinas virtuales de las bases de datos ya estan operativas.
+
+Guías utilizadas para las maquinas virtuales:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-master-slave-replication-in-mysql
+
+#### Host
+Para acceder a esta maquina se usa:
+
+vagrant ssh host
+una vez dentro se procede a descargar los datos de mysql-client:
+    
+    sudo apt-get mysql-client
+    
+
+    
+Destpues se procede directamente a abrir el jar con el sistema configurado para soportar las BBDD maestro/esclavo
+    
+    sudo java -jar Football-Network-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql:replication://address=(protocol=tcp)(host=192.168.10.23)(port=3306)(type=master), address=(protocol=tcp)(host=192.168.10.25)(port=3306)(type=slave)/footballnetwork?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="host" --spring.datasource.password="brujula61" --spring.jpa.hibernate.ddl-auto="update" --spring.datasource.driverClassName="com.mysql.jdbc.ReplicationDriver"
+
+#### HostBU
+Para acceder a esta maquina se usa:
+
+vagrant ssh host
+una vez dentro se procede a descargar los datos de mysql-client:
+    
+    sudo apt-get mysql-client
+    
+
+    
+Destpues se procede directamente a abrir el jar con el sistema configurado para soportar las BBDD maestro/esclavo
+    
+    sudo java -jar Football-Network-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql:replication://address=(protocol=tcp)(host=192.168.10.23)(port=3306)(type=master), address=(protocol=tcp)(host=192.168.10.25)(port=3306)(type=slave)/footballnetwork?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="host" --spring.datasource.password="brujula61" --spring.jpa.hibernate.ddl-auto="update" --spring.datasource.driverClassName="com.mysql.jdbc.ReplicationDriver"
+
+#### HostBalancer
+
+1.- Instalacion PPA
+
+    add-apt-repository ppa:vbernat/haproxy-1.5
+    
+2.- Actualizacion del sistema
+
+    apt-get update
+    apt-get dist-upgrade
+    
+3.- Instalacion de HAProxy
+Tras la correcta actualización, se instala HAProxy:
+
+    apt-get install haproxy
+4.- Generacion de Certificado SSL
+Debido a que nuestros servidores web emplean certificado es necesario generar un certificado para que haproxy permita la redirección a dichos servidores. Para ello lo primero que se hará es crear un directorio donde guardar las claves y certificados:
+
+    sudo mkdir /etc/ssl/xip.io
+A continuación nos dirigimos a dicho directorio creado para ello realizamos esta serie de comandos:
+
+    cd
+    cd /vagrant
+    cd /etc
+    cd ssl
+    cd xip.io
+Y creamos el fichero que contiene la clave privada:
+
+    sudo openssl genrsa -out xip.io.key 1024
+Tras su creación, se crea el primer certificado con el siguiente comando:
+
+    sudo openssl req -new -key xip.io.key \-out xip.io.csr
+El cual nos mostrará un formulario que se completará como se ve a continuación: 
+    
+    > Country Name (2 letter code) [AU]:US
+    > State or Province Name (full name) [Some-State]:Connecticut
+    > Locality Name (eg, city) []:New Haven
+    > Organization Name (eg, company) [Internet Widgits Pty Ltd]:footballnetwork
+    > Organizational Unit Name (eg, section) []:
+    > Common Name (e.g. server FQDN or YOUR name) []:*.xip.io
+    > Email Address []:footballnetwork@gmail.com
+    > Please enter the following 'extra' attributes to be sent with your certificate request
+    > A challenge password []:brujula61
+    > An optional company name []:alvarobm
+
+Tras ello, creamos el segundo certificado:
+
+    sudo openssl x509 -req -days 365 -in xip.io.csr \-signkey xip.io.key \-out xip.io.crt
+
+
+Finalmente se crea el certificado necesario para haproxy, creado a partir de xip.io.keyy xip.io.crt, mediante el comando:
+
+    sudo -s cat xip.io.crt xip.io.key \ | sudo tee xip.io.pem
+
+
+Información extraida de:
+
+    https://serversforhackers.com/c/using-ssl-certificates-with-haproxy
+
+5.- Configuracion de HAProxy
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a /etc/haproxy y allí, se aprueban los permisos del archivo haproxy.cfg:
+
+    chmod +rwx haproxy.cfg
+Y se procede a editarlo:
+
+    sudo nano haproxy.cfg
+En él se añaden las siguientes líneas:
+
+En la sección defaults:
+
+    option forwardfor
+    option http-server-close
+despues:
+
+    listen haproxy
+    bind 0.0.0.0:443 ssl crt /etc/ssl/xip.io/xip.io.pem
+    mode http
+    stats enable
+    stats uri /haproxy?stats
+    balance roundrobin
+    option http-server-close
+    option forwardfor
+    reqadd X-Forwarded-Proto:\ https
+    reqadd X-Forwarded-Port:\ 443
+    option forwardfor if-none
+    option abortclose
+    server host 192.168.10.21:3306
+    server hostBU 192.168.10.24:3306
+
+Finalmente se guarda el archivo mediante Ctrl + X, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
+    sudo service haproxy restart
+6.- Inicio de HAProxy
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
+    sudo service haproxy start
+
+### Hazelcast
+Desde eclipse o el entorno de desarrollo java que se haya utilizado se edita la clase principal de la aplicación web incluyendo el cacheo de las sesiones para evitar la perdida de estas cuando se realice el balanceo de carga.
+
+    @Bean
+    public Config config() {
+	    Config config = new Config();
+	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
+	    joinConfig.getMulticastConfig().setEnabled(false);
+	    joinConfig.getTcpIpConfig().addMember( "192.168.10.21" ).addMember( "168.192.10.24" ).setEnabled( true );
+	    return config;
+    }
+    @Bean
+    public CacheManager cacheManager() {
+    	return new ConcurrentMapCacheManager("player");
+    }
+    }
+Ademas deberemos añadir ciertas dependencias en el fichero pom.xml:
+Así deberían quedar las dependencias del fichero pom.xml:
+
+		<dependencies>
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-mustache</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-web</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-data-jpa</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>mysql</groupId>
+    			<artifactId>mysql-connector-java</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-devtools</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-starter-security</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>com.fasterxml.jackson.core</groupId>
+    			<artifactId>jackson-databind</artifactId>
+    			<version>2.5.3</version>
+    		</dependency>
+    		<dependency>
+    			<groupId>com.fasterxml.jackson.datatype</groupId>
+    			<artifactId>jackson-datatype-jsr310</artifactId>
+    			<version>2.5.3</version>
+    		</dependency>
+    		<dependency>
+    			<groupId>org.springframework.session</groupId>
+    			<artifactId>spring-session</artifactId>
+    		</dependency>
+    		<dependency>
+    			<groupId>com.hazelcast</groupId>
+    			<artifactId>hazelcast</artifactId>
+    			<version>3.9.3</version>
+    		</dependency>
+    		<dependency>
+    			<groupId>com.hazelcast</groupId>
+    			<artifactId>hazelcast-spring</artifactId>
+    			<version>${hazelcast.version}</version>
+    		</dependency>
+    		<dependency>
+    			<groupId>com.hazelcast</groupId>
+    			<artifactId>hazelcast-wm</artifactId>
+    			<version>${hazelcast.version}</version>
+    		</dependency>
+    		
+    		
+    	</dependencies>
+
