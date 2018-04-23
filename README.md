@@ -585,3 +585,6 @@ Así deberían quedar las dependencias del fichero pom.xml:
     		
     	</dependencies>
 
+### Diagrama de Infraestructura
+
+![Diagrame Infraestructura](/DiagramaVagrant.png)
