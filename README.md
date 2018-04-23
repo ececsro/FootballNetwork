@@ -588,3 +588,21 @@ Así deberían quedar las dependencias del fichero pom.xml:
 ### Diagrama de Infraestructura
 
 ![Diagrame Infraestructura](/DiagramaVagrant.png)
+
+### Documentación Servicio Interno
+
+El servicio consiste en un servicio REST consistente en simplemente un comando:
+
+    send (post(EMAIL{"from":"","to":"","msg":""})
+Este comando send de tipo POST recibe un objeto JSON llamado EMAIL que contiene las partes que podemos ver en el mensaje: from, to, msg.
+para acceder a este servicio REST solamente es necesario hacer una llamada a el puerto con los datos requeridos desde un cliente rest:
+    
+    http://192.168.10.22:8060/
+    
+Para llevar a cabo la incorporacion de este cliente REST en java es necesario incorporar el siguiente codigo:
+
+        private String servicePath = "http://192.168.10.22:8060/";
+        RestTemplate rt = new RestTemplate();
+        String url=servicePath+"send";
+        Email email = new Email(from, to, data);
+        rt.postForLocation(url, email);
