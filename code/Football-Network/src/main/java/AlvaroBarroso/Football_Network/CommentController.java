@@ -13,7 +13,9 @@ public class CommentController {
 		//Remote
 		//private String path = "https://192.168.56.1:8060/";
 		//Local
-		private String path = "./";
+//		private String path = "./";
+//		private String path = "https://localhost:8443/";
+		private String path = "https://192.168.56.1:8060/";
 
 	@Autowired
 	private PlayerRepository 	playerRepository;
@@ -33,7 +35,8 @@ public class CommentController {
 		playerRepository.getOne(id).addComment(com);
 		commentRepository.save(com);
 
-		return "redirect:" + "https://192.168.10.20/" + "player/" + id;
+//		return "redirect:" + "https://192.168.10.20/" + "player/" + id;
+		return "redirect:" + path + "player/" + id;
 		//return getPlayer(model,id);
 		//return "/getplayer/"+id;
 	}
@@ -45,7 +48,8 @@ public class CommentController {
 		comment.setKarma(comment.getKarma()+1);
 		commentRepository.save(comment);
 
-		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
+//		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
+		return "redirect:" + path + "player/" + pid;
 		//return getPlayer(model,pid);
 	}
 	@GetMapping("/player/downKarma/{id}/{pid}")
@@ -53,7 +57,8 @@ public class CommentController {
 		Comment comment = commentRepository.getOne(id);
 		comment.setKarma(comment.getKarma()-1);
 		commentRepository.save(comment);
-		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
+//		return "redirect:" + "https://192.168.10.20/" + "player/" + pid;
+		return "redirect:" + path + "player/" + pid;
 		//return getPlayer(model,pid);
 	}
 
