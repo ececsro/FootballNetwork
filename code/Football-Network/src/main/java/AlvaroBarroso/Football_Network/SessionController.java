@@ -45,7 +45,8 @@ public class SessionController {
 //	private String path = "./";
 //	private String path = "https://localhost:8443/";
 //	private String path = "https://192.168.56.1:8060/";
-	private String path = "https://football-network-service:8443/";
+//	private String path = "https://football-network-service:8443/";
+	private String path = "https://192.168.99.100:31708/";
 
 
 	

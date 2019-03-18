@@ -14,8 +14,10 @@ public class CommentController {
 		//private String path = "https://192.168.56.1:8060/";
 		//Local
 //		private String path = "./";
-		private String path = "https://football-network-service:8443/";
+//		private String path = "https://football-network-service:8443/";
 //		private String path = "https://192.168.56.1:8060/";
+		private String path = "https://192.168.99.100:31708/";
+		
 
 	@Autowired
 	private PlayerRepository 	playerRepository;
