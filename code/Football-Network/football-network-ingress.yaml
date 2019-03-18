@@ -13,11 +13,11 @@ spec:
       - path: /home/
         backend:
           serviceName: football-network-service
-          servicePort: 8443
+          servicePort: 31708
       - path: /player/
         backend:
           serviceName: football-network-service
-          servicePort: 8443
+          servicePort: 31708
       - path: /send/
         backend:
           serviceName: contact-service-service
