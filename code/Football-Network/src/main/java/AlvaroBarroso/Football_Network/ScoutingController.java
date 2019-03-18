@@ -22,7 +22,9 @@ public class ScoutingController {
 //		private String path = "https://localhost:8443/";
 //		private String path = "https://192.168.56.1:8060/";
 //		private String path = "https://football-network-service:8443/";
-		private String path = "https://192.168.99.100:31708/";
+//		private String path = "https://192.168.99.100:31708/";
+//		private String path = "https://football-network.minikube.io:8443/";
+		private String path = "https://football-network.minikube.io:8443/";
 
 	@Autowired
 	private PlayerRepository 	playerRepository;
