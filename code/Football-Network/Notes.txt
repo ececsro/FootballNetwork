@@ -1,0 +1,1778 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos los derechos reservados.
+
+PS C:\Users\Carlos> minikube start
+o   minikube v0.34.1 on windows (amd64)
+i   Tip: Use 'minikube start -p <name>' to create a new cluster, or 'minikube delete' to delete this one.
+:   Restarting existing virtualbox VM for "minikube" ...
+:   Waiting for SSH access ...
+-   "minikube" IP address is 192.168.99.100
+-   Configuring Docker as the container runtime ...
+-   Preparing Kubernetes environment ...
+-   Pulling images required by Kubernetes v1.13.3 ...
+X   Unable to pull images, which may be OK: running cmd: sudo kubeadm config images pull --config /var/lib/kubeadm.yaml: command failed: sudo kubeadm config images pull --config /var/lib/kubeadm.yaml
+stdout:
+stderr: failed to pull image "k8s.gcr.io/kube-apiserver:v1.13.3": output: Error response from daemon: Get https://k8s.gcr.io/v2/: dial tcp: lookup k8s.gcr.io on 10.0.2.3:53: no such host
+, error: exit status 1
+: Process exited with status 1
+:   Relaunching Kubernetes v1.13.3 using kubeadm ...
+:   Waiting for kube-proxy to come back up ...
+-   Verifying component health ......
++   kubectl is now configured to use "minikube"
+=   Done! Thank you for using minikube!
+PS C:\Users\Carlos>
+PS C:\Users\Carlos> cd .\minikube_scripts\
+PS C:\Users\Carlos\minikube_scripts> ll
+ll : El término 'll' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable.
+Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e
+inténtelo de nuevo.
+En línea: 1 Carácter: 1
++ ll
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ll:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Carlos\minikube_scripts> ls -l
+Get-ChildItem : Falta un argumento para el parámetro 'LiteralPath'. Especifique un parámetro del tipo
+'System.String[]' e inténtelo de nuevo.
+En línea: 1 Carácter: 4
++ ls -l
++    ~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-ChildItem], ParameterBindingException
+    + FullyQualifiedErrorId : MissingArgument,Microsoft.PowerShell.Commands.GetChildItemCommand
+
+PS C:\Users\Carlos\minikube_scripts> ls
+
+
+    Directorio: C:\Users\Carlos\minikube_scripts
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/03/2019     10:27                football-network
+d-----       10/03/2019     10:27                footballnetwork
+-a----       10/03/2019      1:09           1330 football-network-mysql-service.yaml
+-a----       10/03/2019      1:09            417 hpa-autoscaling.yaml
+-a----       10/03/2019      1:09            674 HPA_deployment.yaml
+-a----       10/03/2019      1:09            594 ingress.yaml
+-a----       10/03/2019      1:09            254 new 1.txt
+-a----       10/03/2019      1:09           3827 new 2.txt
+-a----       10/03/2019      1:09           1669 webanuncios_practica_minikube.yaml
+-a----       10/03/2019      1:09            632 webanuncios_practica_minikube_solution.yaml
+-a----       10/03/2019      1:09           1311 webanuncios_practica_minikube_volumen.yaml
+-a----       10/03/2019      1:09            847 webanuncios_practica_volume_app_solution.yaml
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.txt
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.yaml
+-a----       10/03/2019      1:09           1297 webanuncios_practica_volume_solution.txt
+-a----       10/03/2019      1:09            535 webgatos-minikube-deployment.yaml
+-a----       10/03/2019      1:09            266 webgatos-minikube-services.yaml
+-a----       10/03/2019      1:09            829 webgatos-minikube.yaml
+
+
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> minikube dashboard
+There is a newer version of minikube available (v0.35.0).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v0.35.0
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+-   Enabling dashboard ...
+-   Verifying dashboard health ...
+-   Launching proxy ...
+-   Verifying proxy health ...
+-   Opening http://127.0.0.1:51470/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> minikube dashboard &
+En línea: 1 Carácter: 20
++ minikube dashboard &
++                    ~
+No se permite usar el carácter de Y comercial (&). El operador & está reservado para un uso futuro; encierre un
+símbolo de Y comercial entre comillas dobles ("&") para pasarlo como parte de una cadena.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : AmpersandNotAllowed
+
+PS C:\Users\Carlos\minikube_scripts> kubectl create -f .\football-network-mysql-service.yaml
+service/football-network-db created
+deployment.apps/mysql created
+persistentvolumeclaim/mysql-pvc created
+persistentvolume/mysql-pv created
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$
+$
+$
+$ ll
+-bash: ll: command not found
+$ ls
+$ pwd
+/home/docker
+$ cd ..
+$ ls
+docker  rkt
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> minikube ip
+192.168.99.100
+PS C:\Users\Carlos\minikube_scripts> scp
+usage: scp [-346BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file]
+           [-l limit] [-o ssh_option] [-P port] [-S program] source ... target
+PS C:\Users\Carlos\minikube_scripts> ll
+ll : El término 'll' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable.
+Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e
+inténtelo de nuevo.
+En línea: 1 Carácter: 1
++ ll
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ll:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\Carlos\minikube_scripts> ls
+
+
+    Directorio: C:\Users\Carlos\minikube_scripts
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/03/2019     10:27                football-network
+d-----       10/03/2019     10:27                footballnetwork
+-a----       10/03/2019     11:05            305 DockerfileContactService
+-a----       10/03/2019     11:05            309 DockerfileFootballNetwork
+-a----       10/03/2019     11:05           1330 football-network-mysql-service.yaml
+-a----       10/03/2019      1:09            417 hpa-autoscaling.yaml
+-a----       10/03/2019      1:09            674 HPA_deployment.yaml
+-a----       10/03/2019      1:09            594 ingress.yaml
+-a----       10/03/2019      1:09            254 new 1.txt
+-a----       10/03/2019      1:09           3827 new 2.txt
+-a----       10/03/2019      1:09           1669 webanuncios_practica_minikube.yaml
+-a----       10/03/2019      1:09            632 webanuncios_practica_minikube_solution.yaml
+-a----       10/03/2019      1:09           1311 webanuncios_practica_minikube_volumen.yaml
+-a----       10/03/2019      1:09            847 webanuncios_practica_volume_app_solution.yaml
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.txt
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.yaml
+-a----       10/03/2019      1:09           1297 webanuncios_practica_volume_solution.txt
+-a----       10/03/2019      1:09            535 webgatos-minikube-deployment.yaml
+-a----       10/03/2019      1:09            266 webgatos-minikube-services.yaml
+-a----       10/03/2019      1:09            829 webgatos-minikube.yaml
+
+
+PS C:\Users\Carlos\minikube_scripts> scp Dockerfile* 192:168.99.100:/
+C:\\Windows\\System32\\OpenSSH\\ssh.exe: Could not resolve hostname 192: Host desconocido.
+lost connection
+PS C:\Users\Carlos\minikube_scripts> scp Dockerfile* 192.168.99.100:/
+The authenticity of host '192.168.99.100 (192.168.99.100)' can't be established.
+ECDSA key fingerprint is SHA256:p2vTBZs/yK3VITgegett/VykP/6nDvWzHtuv+0S0otk.
+Are you sure you want to continue connecting (yes/no)?
+Warning: Permanently added '192.168.99.100' (ECDSA) to the list of known hosts.
+carlos@192.168.99.100's password:
+lost connection
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> scp Dockerfile* docker@192.168.99.100:/
+docker@192.168.99.100's password:
+Dockerfile*: Protocol not available
+PS C:\Users\Carlos\minikube_scripts> scp Dockerfile* docker@192.168.99.100
+DockerfileContactService
+DockerfileFootballNetwork
+        1 archivo(s) copiado(s).
+PS C:\Users\Carlos\minikube_scripts> scp Dockerfile* docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+Dockerfile*: Protocol not available
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileContactService docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileContactService                                                              100%  305     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileFootballNetwork docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileFootballNetwork                                                             100%  309     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> ls
+
+
+    Directorio: C:\Users\Carlos\minikube_scripts
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/03/2019     10:27                football-network
+d-----       10/03/2019     10:27                footballnetwork
+-a----       10/03/2019     11:23            615 docker@192.168.99.100
+-a----       10/03/2019     11:05            305 DockerfileContactService
+-a----       10/03/2019     11:05            309 DockerfileFootballNetwork
+-a----       10/03/2019     11:05           1330 football-network-mysql-service.yaml
+-a----       10/03/2019      1:09            417 hpa-autoscaling.yaml
+-a----       10/03/2019      1:09            674 HPA_deployment.yaml
+-a----       10/03/2019      1:09            594 ingress.yaml
+-a----       10/03/2019      1:09            254 new 1.txt
+-a----       10/03/2019      1:09           3827 new 2.txt
+-a----       10/03/2019      1:09           1669 webanuncios_practica_minikube.yaml
+-a----       10/03/2019      1:09            632 webanuncios_practica_minikube_solution.yaml
+-a----       10/03/2019      1:09           1311 webanuncios_practica_minikube_volumen.yaml
+-a----       10/03/2019      1:09            847 webanuncios_practica_volume_app_solution.yaml
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.txt
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.yaml
+-a----       10/03/2019      1:09           1297 webanuncios_practica_volume_solution.txt
+-a----       10/03/2019      1:09            535 webgatos-minikube-deployment.yaml
+-a----       10/03/2019      1:09            266 webgatos-minikube-services.yaml
+-a----       10/03/2019      1:09            829 webgatos-minikube.yaml
+
+
+PS C:\Users\Carlos\minikube_scripts> del .\docker@192.168.99.100
+PS C:\Users\Carlos\minikube_scripts> ls
+
+
+    Directorio: C:\Users\Carlos\minikube_scripts
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/03/2019     10:27                football-network
+d-----       10/03/2019     10:27                footballnetwork
+-a----       10/03/2019     11:05            305 DockerfileContactService
+-a----       10/03/2019     11:05            309 DockerfileFootballNetwork
+-a----       10/03/2019     11:05           1330 football-network-mysql-service.yaml
+-a----       10/03/2019      1:09            417 hpa-autoscaling.yaml
+-a----       10/03/2019      1:09            674 HPA_deployment.yaml
+-a----       10/03/2019      1:09            594 ingress.yaml
+-a----       10/03/2019      1:09            254 new 1.txt
+-a----       10/03/2019      1:09           3827 new 2.txt
+-a----       10/03/2019      1:09           1669 webanuncios_practica_minikube.yaml
+-a----       10/03/2019      1:09            632 webanuncios_practica_minikube_solution.yaml
+-a----       10/03/2019      1:09           1311 webanuncios_practica_minikube_volumen.yaml
+-a----       10/03/2019      1:09            847 webanuncios_practica_volume_app_solution.yaml
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.txt
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.yaml
+-a----       10/03/2019      1:09           1297 webanuncios_practica_volume_solution.txt
+-a----       10/03/2019      1:09            535 webgatos-minikube-deployment.yaml
+-a----       10/03/2019      1:09            266 webgatos-minikube-services.yaml
+-a----       10/03/2019      1:09            829 webgatos-minikube.yaml
+
+
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ ls
+DockerfileContactService  DockerfileFootballNetwork
+$
+$
+$
+$ docker build -t FootballNetwork:v01 -f Docker[?5h[?5lfil[?5h[?5leFootballNetwork .
+invalid argument "FootballNetwork:v01" for "-t, --tag" flag: invalid reference format: repository name must be lowercase
+See 'docker build --help'.
+$ docker build -t football_network:v01 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  6.656kB
+Step 1/4 : FROM ubuntu:latest
+latest: Pulling from library/ubuntu
+
+[1B36f81810: Pulling fs layer
+[1B88a85b96: Pulling fs layer
+[1B4b3efe06: Pulling fs layer
+[1BDigest: sha256:7a47ccc3bbe8a451b500d2b53104868b46d60ee8f5b35a24b41a86077c650210
+Status: Downloaded newer image for ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/Football-Network-0.4.1-SNAPSHOT.jar /usr/src/app/
+COPY failed: stat /var/lib/docker/tmp/docker-builder747329395/target/Football-Network-0.4.1-SNAPSHOT.jar: no such file or directory
+$ exit
+logout
+ssh: Process exited with status 1
+PS C:\Users\Carlos\minikube_scripts> ls
+
+
+    Directorio: C:\Users\Carlos\minikube_scripts
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       10/03/2019     10:27                football-network
+d-----       10/03/2019     10:27                footballnetwork
+d-----       10/03/2019     11:57                target
+-a----       10/03/2019     11:05            305 DockerfileContactService
+-a----       10/03/2019     11:05            309 DockerfileFootballNetwork
+-a----       10/03/2019     11:05           1330 football-network-mysql-service.yaml
+-a----       10/03/2019      1:09            417 hpa-autoscaling.yaml
+-a----       10/03/2019      1:09            674 HPA_deployment.yaml
+-a----       10/03/2019      1:09            594 ingress.yaml
+-a----       10/03/2019      1:09            254 new 1.txt
+-a----       10/03/2019      1:09           3827 new 2.txt
+-a----       10/03/2019      1:09           1669 webanuncios_practica_minikube.yaml
+-a----       10/03/2019      1:09            632 webanuncios_practica_minikube_solution.yaml
+-a----       10/03/2019      1:09           1311 webanuncios_practica_minikube_volumen.yaml
+-a----       10/03/2019      1:09            847 webanuncios_practica_volume_app_solution.yaml
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.txt
+-a----       10/03/2019      1:09           1302 webanuncios_practica_volume_db_solution.yaml
+-a----       10/03/2019      1:09           1297 webanuncios_practica_volume_solution.txt
+-a----       10/03/2019      1:09            535 webgatos-minikube-deployment.yaml
+-a----       10/03/2019      1:09            266 webgatos-minikube-services.yaml
+-a----       10/03/2019      1:09            829 webgatos-minikube.yaml
+
+
+PS C:\Users\Carlos\minikube_scripts> scp -r target docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+ContactService-0.4.1-SNAPSHOT.jar                                                     100%   15MB  14.6MB/s   00:00
+Football-Network-0.4.1-SNAPSHOT.jar                                                   100%   37MB  37.5MB/s   00:01
+PS C:\Users\Carlos\minikube_scripts> minikube shh
+Error: unknown command "shh" for "minikube"
+
+Did you mean this?
+        ssh
+
+Run 'minikube --help' for usage.
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ ls
+DockerfileContactService  DockerfileFootballNetwork  target
+$ docker build -t football_network:v0.4.1 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  54.56MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/Football-Network-0.4.1-SNAPSHOT.jar /usr/src/app/
+ ---> d768e29bea65
+Step 3/4 : EXPOSE 8060
+ ---> Running in 1f783cfc5693
+Removing intermediate container 1f783cfc5693
+ ---> f1fb574017e9
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.1-SNAPSHOT.jar"]
+ ---> Running in f1cd82044545
+Removing intermediate container f1cd82044545
+ ---> 64815aabe31c
+Successfully built 64815aabe31c
+Successfully tagged football_network:v0.4.1
+$ docker build -t contact_service:v0.4.1 -f DockerfileContactService .
+Sending build context to Docker daemon  54.56MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/ContactService-0.4.1-SNAPSHOT.jar /usr/src/app/
+ ---> bf45757b0431
+Step 3/4 : EXPOSE 8443
+ ---> Running in 7af5ae476c2a
+Removing intermediate container 7af5ae476c2a
+ ---> 43a00be53202
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.1-SNAPSHOT.jar"]
+ ---> Running in b52f759108dd
+Removing intermediate container b52f759108dd
+ ---> 9369de26410f
+Successfully built 9369de26410f
+Successfully tagged contact_service:v0.4.1
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED              SIZE
+contact_service                           v0.4.1              9369de26410f        6 seconds ago        103MB
+football_network                          v0.4.1              64815aabe31c        About a minute ago   127MB
+mysql                                     5.6                 69056560eb44        5 days ago           256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago          88.1MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago          181MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago          80.3MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago          146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago          79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago         122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago         40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago         220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago        78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago        742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago        80.8MB
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> minikube ip
+192.168.99.100
+PS C:\Users\Carlos\minikube_scripts> scp -r target docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+ContactService-0.4.1-SNAPSHOT.jar                                                     100%   15MB  14.6MB/s   00:01
+ContactService-0.4.1-SNAPSHOT_old.jar                                                 100%   15MB  14.6MB/s   00:00
+Football-Network-0.4.1-SNAPSHOT.jar                                                   100%   37MB  37.5MB/s   00:01
+Football-Network-0.4.1-SNAPSHOT_old.jar                                               100%   37MB  37.5MB/s   00:01
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+contact_service                           v0.4.1              9369de26410f        About an hour ago   103MB
+football_network                          v0.4.1              64815aabe31c        About an hour ago   127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> scp -r target docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+ContactService-0.4.1-SNAPSHOT.jar                                                     100%   15MB  14.6MB/s   00:01
+ContactService-0.4.1-SNAPSHOT_old.jar                                                 100%   15MB  14.6MB/s   00:00
+ContactService-0.4.2-SNAPSHOT.jar                                                     100%   15MB  14.6MB/s   00:00
+Football-Network-0.4.1-SNAPSHOT.jar                                                   100%   37MB  37.5MB/s   00:01
+Football-Network-0.4.1-SNAPSHOT_old.jar                                               100%   37MB  37.5MB/s   00:01
+Football-Network-0.4.2-SNAPSHOT.jar                                                   100%   37MB  37.5MB/s   00:01
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$
+$
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileFootballNetwork docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileFootballNetwork                                                             100%  309     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileContactService docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileContactService                                                              100%  305     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ [?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5lls
+DockerfileContactService  DockerfileFootballNetwork  target
+$
+$
+$
+$ ls
+DockerfileContactService  DockerfileFootballNetwork  target
+$
+$
+$ docker build -t contact-service:v0.4.2 -f DockerfileContactService .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 5bd937dbf4a8
+Step 3/4 : EXPOSE 8443
+ ---> Running in 986fa92235e1
+Removing intermediate container 986fa92235e1
+ ---> 48b0d1c00ad3
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.1-SNAPSHOT.jar"]
+ ---> Running in 2818d988c3d7
+Removing intermediate container 2818d988c3d7
+ ---> 4810eddc1a08
+Successfully built 4810eddc1a08
+Successfully tagged contact-service:v0.4.2
+$ docker build -t football-network:v.0.4.2 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/Football-Network-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 5b24fc41b73b
+Step 3/4 : EXPOSE 8060
+ ---> Running in 641d1bfb5667
+Removing intermediate container 641d1bfb5667
+ ---> 4e00c16dc538
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.1-SNAPSHOT.jar"]
+ ---> Running in 43f138ac1396
+Removing intermediate container 43f138ac1396
+ ---> 79e2a16fe4cd
+Successfully built 79e2a16fe4cd
+Successfully tagged football-network:v.0.4.2
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+football-network                          v.0.4.2             79e2a16fe4cd        6 seconds ago       127MB
+contact-service                           v0.4.2              4810eddc1a08        48 seconds ago      103MB
+contact_service                           v0.4.1              9369de26410f        About an hour ago   103MB
+football_network                          v0.4.1              64815aabe31c        About an hour ago   127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+football-network                          v.0.4.2             79e2a16fe4cd        2 minutes ago       127MB
+contact-service                           v0.4.2              4810eddc1a08        3 minutes ago       103MB
+contact_service                           v0.4.1              9369de26410f        About an hour ago   103MB
+football_network                          v0.4.1              64815aabe31c        About an hour ago   127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker images --help
+-bash: dock--help: command not found
+$ docker rmi football-network:v.0.4.2
+Untagged: football-network:v.0.4.2
+Deleted: sha256:79e2a16fe4cd82b76d8ef586eb5a54e127e486b4740e4e03b346a46711b764fc
+Deleted: sha256:4e00c16dc53838192b8cda7767e0ff6faffe51f9dd7f92164fbd025734ee8a53
+Deleted: sha256:5b24fc41b73b06498eda581e7650d2472a9da3abc004892550d9f4cc7cedfdac
+Deleted: sha256:977b81f82418ff90d63b1b063e1853644641ca225811030ec139c68a1782f820
+$ docker rmi contac-service:v0.4.2
+Error: No such image: contac-service:v0.4.2
+$ docker rmi contact-service:v0.4.2
+Untagged: contact-service:v0.4.2
+Deleted: sha256:4810eddc1a08aecf8e7ceb98bad895a5fb8782289bd370b7f49fb5ef3da155e9
+Deleted: sha256:48b0d1c00ad35df52bf8429543123a08aa7a1bf613adcd5bdc34775d67cfd358
+Deleted: sha256:5bd937dbf4a8c69461024ab7c043a802bb53cb954b51e9fedcefe678107d2460
+Deleted: sha256:716d4377a04d70626371d62940eb587e697c8f07b2685047b602c4ad7bd1e7a4
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+contact_service                           v0.4.1              9369de26410f        About an hour ago   103MB
+football_network                          v0.4.1              64815aabe31c        About an hour ago   127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker images contact-service
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+$ docker rmi contact-service
+Error: No such image: contact-service
+$ docker rmi contact-service:v0.4.1
+Error: No such image: contact-service:v0.4.1
+$ docker rmi contact_service:v0.4.1
+Untagged: contact_service:v0.4.1
+Deleted: sha256:9369de26410f9271d1815263e016ae9b655d6c052a74277f29227f0d781d44d7
+Deleted: sha256:43a00be53202ac493b8d9ab3bac5a4aac22ca9f8bed491fcfd3e53e2419b5fff
+Deleted: sha256:bf45757b04317e270cfd202b98536348dfc546e2e5b22aeea787081726ef200c
+Deleted: sha256:fd647172d02d930c83f26105df4e1180fcf4ed4616b0bcae44d0f8a5edc234a7
+$ docker rmi football_network v0.4.1
+Error: No such image: football_network
+Error: No such image: v0.4.1
+$ docker rmi footbal_network:v0.4.1
+Error: No such image: footbal_network:v0.4.1
+$ docker rmi football_network v0.4.1
+Error: No such image: football_network
+Error: No such image: v0.4.1
+$ docker rmi football_network:v0.4.1
+Untagged: football_network:v0.4.1
+Deleted: sha256:64815aabe31cdbf4e900a1f3f75800d4fe42d2e5caaf6d75c7439009e08439da
+Deleted: sha256:f1fb574017e9169f40267cb74987628b53be0a9394700522510cb5787faae932
+Deleted: sha256:d768e29bea6517b043c6b1c3e85ee4bda01000f4906ef009534727dc4843f6c6
+Deleted: sha256:3a8e161c52944ea26fba4eb638a85fe6c25ba3d78206c1926478017580d1817e
+$ docker imagwes
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "/home/docker/.docker")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "/home/docker/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "/home/docker/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "/home/docker/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  config      Manage Docker configs
+  container   Manage containers
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$
+$
+$
+$
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileFootballNetwork docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileFootballNetwork                                                             100%  309     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileContactService docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileContactService                                                              100%  305     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ docker build -t football-network:v0.4.2 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/Football-Network-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> f4d16fa0b811
+Step 3/4 : EXPOSE 8443
+ ---> Running in b2afebc6b1de
+Removing intermediate container b2afebc6b1de
+ ---> 1a6edf4e096b
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.1-SNAPSHOT.jar"]
+ ---> Running in 4cdbd776dd42
+Removing intermediate container 4cdbd776dd42
+ ---> 18a6a48a3e4d
+Successfully built 18a6a48a3e4d
+Successfully tagged football-network:v0.4.2
+$ docker build -t contact-service:v0.4.2 -f DockerfileContactService .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 97df672d2f89
+Step 3/4 : EXPOSE 8060
+ ---> Running in a19f65952d0e
+Removing intermediate container a19f65952d0e
+ ---> 4d8e42755d4a
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.1-SNAPSHOT.jar"]
+ ---> Running in f2f0b0e78fc0
+Removing intermediate container f2f0b0e78fc0
+ ---> 7958373a23b0
+Successfully built 7958373a23b0
+Successfully tagged contact-service:v0.4.2
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED              SIZE
+contact-service                           v0.4.2              7958373a23b0        About a minute ago   103MB
+football-network                          v0.4.2              18a6a48a3e4d        2 minutes ago        127MB
+mysql                                     5.6                 69056560eb44        5 days ago           256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago          88.1MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago          80.3MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago          181MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago          146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago          79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago         122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago         40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago         220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago        78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago        742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago        80.8MB
+$ docker run -t football-network
+Unable to find image 'football-network:latest' locally
+docker: Error response from daemon: pull access denied for football-network, repository does not exist or may require 'docker login'.
+See 'docker run --help'.
+$ [?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l[?5h[?5l
+$
+$
+$
+$
+$ exit
+logout
+ssh: Process exited with status 125
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mysql   1/1     1            1           142m
+PS C:\Users\Carlos\minikube_scripts> kubectl get services
+NAME                  TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+football-network-db   ClusterIP   None         <none>        3306/TCP   143m
+kubernetes            ClusterIP   10.96.0.1    <none>        443/TCP    13d
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep -- image=football-network:v0.4.2
+Error: required flag(s) "image" not set
+
+
+Aliases:
+deployment, deploy
+
+Examples:
+  # Create a new deployment named my-dep that runs the busybox image.
+  kubectl create deployment my-dep --image=busybox
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --dry-run=false: If true, only print the object that would be sent, without sending it.
+      --generator='': The name of the API generator to use.
+      --image=[]: Image name to run.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-file.
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --validate=true: If true, use a schema to validate the input before sending it
+
+Usage:
+  kubectl create deployment NAME --image=image [--dry-run] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+required flag(s) "image" not set
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep --
+Error: required flag(s) "image" not set
+
+
+Aliases:
+deployment, deploy
+
+Examples:
+  # Create a new deployment named my-dep that runs the busybox image.
+  kubectl create deployment my-dep --image=busybox
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --dry-run=false: If true, only print the object that would be sent, without sending it.
+      --generator='': The name of the API generator to use.
+      --image=[]: Image name to run.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-file.
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --validate=true: If true, use a schema to validate the input before sending it
+
+Usage:
+  kubectl create deployment NAME --image=image [--dry-run] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+required flag(s) "image" not set
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep -- dry-run
+Error: required flag(s) "image" not set
+
+
+Aliases:
+deployment, deploy
+
+Examples:
+  # Create a new deployment named my-dep that runs the busybox image.
+  kubectl create deployment my-dep --image=busybox
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --dry-run=false: If true, only print the object that would be sent, without sending it.
+      --generator='': The name of the API generator to use.
+      --image=[]: Image name to run.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-file.
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --validate=true: If true, use a schema to validate the input before sending it
+
+Usage:
+  kubectl create deployment NAME --image=image [--dry-run] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+required flag(s) "image" not set
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep --image=football-network:v0.4.2 --dr
+y-run
+deployment.apps/football-network-dep created (dry run)
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep --image=football-network:v0.4.2
+deployment.apps/football-network-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployment
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+football-network-dep   0/1     1            0           10s
+mysql                  1/1     1            1           146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployment
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+football-network-dep   0/1     1            0           15s
+mysql                  1/1     1            1           146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   2          22s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   2          26s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   2          28s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   2          36s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          146m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   2          37s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          146m
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment contact-service-dep --image=contact-service:v0.4.2
+deployment.apps/contact-service-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     RunContainerError   1          4s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff    3          73s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          147m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     RunContainerError   2          45s
+football-network-dep-7848fc947f-w4rkn   0/1     RunContainerError   4          114s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          148m
+PS C:\Users\Carlos\minikube_scripts> kubectl get logs contact-service-pod
+error: the server doesn't have a resource type "logs"
+PS C:\Users\Carlos\minikube_scripts> kubectl logs contact-service-pod
+Error from server (NotFound): pods "contact-service-pod" not found
+PS C:\Users\Carlos\minikube_scripts> kubectl logs contact-service-dep-866ccf6485-xh986
+PS C:\Users\Carlos\minikube_scripts> kubectl logs football-network-dep-7848fc947f-w4rkn
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m19s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m28s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          149m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m26s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m35s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          149m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m28s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m37s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          149m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m30s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m39s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          150m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m32s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m41s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          150m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m33s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m42s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          150m
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-xh986    0/1     CrashLoopBackOff   4          2m43s
+football-network-dep-7848fc947f-w4rkn   0/1     CrashLoopBackOff   5          3m52s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          150m
+PS C:\Users\Carlos\minikube_scripts> kubectl describe pods
+Name:               contact-service-dep-866ccf6485-xh986
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 13:43:42 +0100
+Labels:             app=contact-service-dep
+                    pod-template-hash=866ccf6485
+Annotations:        <none>
+Status:             Running
+IP:                 172.17.0.7
+Controlled By:      ReplicaSet/contact-service-dep-866ccf6485
+Containers:
+  contact-service:
+    Container ID:   docker://8243c7cc36a48ae4334421fcbf14265dd9846ee42b298f71780ab237b4938f23
+    Image:          contact-service:v0.4.2
+    Image ID:       docker://sha256:7958373a23b09f9a41c9b599bd0f2076f91eb91aee7e7f26282578b31599c549
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       ContainerCannotRun
+      Message:      OCI runtime create failed: container_linux.go:344: starting container process caused "exec: \"java\": executable file not found in $PATH": unknown
+      Exit Code:    127
+      Started:      Sun, 10 Mar 2019 13:46:40 +0100
+      Finished:     Sun, 10 Mar 2019 13:46:40 +0100
+    Ready:          False
+    Restart Count:  5
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  3m28s                 default-scheduler  Successfully assigned default/contact-service-dep-866ccf6485-xh986 to minikube
+  Normal   Pulled     115s (x5 over 3m27s)  kubelet, minikube  Container image "contact-service:v0.4.2" already present on machine
+  Normal   Created    115s (x5 over 3m27s)  kubelet, minikube  Created container
+  Warning  Failed     115s (x5 over 3m27s)  kubelet, minikube  Error: failed to start container "contact-service": Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "exec: \"java\": executable file not found in $PATH": unknown
+  Warning  BackOff    81s (x10 over 3m25s)  kubelet, minikube  Back-off restarting failed container
+
+
+Name:               football-network-dep-7848fc947f-w4rkn
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 13:42:33 +0100
+Labels:             app=football-network-dep
+                    pod-template-hash=7848fc947f
+Annotations:        <none>
+Status:             Running
+IP:                 172.17.0.6
+Controlled By:      ReplicaSet/football-network-dep-7848fc947f
+Containers:
+  football-network:
+    Container ID:   docker://ea9166d42ec3b442e553998c05cfda896459d72287b5a82b5e7a07b226f3faee
+    Image:          football-network:v0.4.2
+    Image ID:       docker://sha256:18a6a48a3e4d0b202318218597e0b19da85f9bbbd49172b571fc3b7e43051778
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       ContainerCannotRun
+      Message:      OCI runtime create failed: container_linux.go:344: starting container process caused "exec: \"java\": executable file not found in $PATH": unknown
+      Exit Code:    127
+      Started:      Sun, 10 Mar 2019 13:45:33 +0100
+      Finished:     Sun, 10 Mar 2019 13:45:33 +0100
+    Ready:          False
+    Restart Count:  5
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  4m37s                   default-scheduler  Successfully assigned default/football-network-dep-7848fc947f-w4rkn to minikube
+  Normal   Pulled     3m6s (x5 over 4m36s)    kubelet, minikube  Container image "football-network:v0.4.2" already present on machine
+  Normal   Created    3m6s (x5 over 4m36s)    kubelet, minikube  Created container
+  Warning  Failed     3m6s (x5 over 4m35s)    kubelet, minikube  Error: failed to start container "football-network": Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "exec: \"java\": executable file not found in $PATH": unknown
+  Warning  BackOff    2m21s (x10 over 4m21s)  kubelet, minikube  Back-off restarting failed container
+
+
+Name:               mysql-f9b6cc99d-2qbkf
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 11:16:27 +0100
+Labels:             app=mysql
+                    pod-template-hash=f9b6cc99d
+Annotations:        <none>
+Status:             Running
+IP:                 172.17.0.5
+Controlled By:      ReplicaSet/mysql-f9b6cc99d
+Containers:
+  mysql:
+    Container ID:   docker://5baee5642d58b28076fc4549d23327ad726c0c2b09d5feba2d13253c6af610cb
+    Image:          mysql:5.6
+    Image ID:       docker-pullable://mysql@sha256:36cad5daaae69fbcc15dd33b9f25f35c41bbe7e06cb7df5e14d8b966fb26c1b4
+    Port:           3306/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 10 Mar 2019 11:16:56 +0100
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      MYSQL_ROOT_PASSWORD:  brujula61
+      MYSQL_DATABASE:       footballnetwork
+    Mounts:
+      /var/lib/mysql from mysql-persistent-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  mysql-persistent-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mysql-pvc
+    ReadOnly:   false
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:          <none>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ ls
+DockerfileContactService  DockerfileFootballNetwork  target
+$ vi Do[?5h[?5lckerfileContactService
+[?1049h[1;1H[J[1;1H# our base image^M[2;1HFROM ubuntu:latest^M[3;1H^M[4;1H# copy files required for the app to run^M[5;1HCOPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/^M[6;1H^M[7;1H# tell the port number the container should expose^M[8;1HEXPOSE 8060^M[9;1H^M[10;1H# run the application^M[11;1HCMD ["java", "-jar", "/usr/src/app/ContactService-0.4.1-SNAPSHOT.jar"][12;1H~[13;1H~[14;1H~[15;1H~[16;1H~[17;1H~[18;1H~[19;1H~[20;1H~[21;1H~[22;1H~[23;1H~[1;1H[24;1H[K- DockerfileContactService 1/10 10%[1;1H[2;1H[24;1H[K- DockerfileContactService 2/10 20%[2;1H[3;1H[24;1H[K- DockerfileContactService 3/10 30%[3;1H[4;1H[24;1H[K- DockerfileContactService 4/10 40%[4;1H[24;1H[K:q![4;1H[4;1H[24;1H[K- DockerfileContactService 4/10 40%[4;1H[24;1H[K[?1049l$
+$
+$
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> C:\Windows\notepad.exe .\DockerfileContactService
+PS C:\Users\Carlos\minikube_scripts> C:\Windows\notepad.exe .\DockerfileFootballNetwork
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileContactService docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileContactService                                                              100%  305     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileFootballNetwork docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileFootballNetwork                                                             100%  309     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+contact-service-dep    0/1     1            0           8m2s
+football-network-dep   0/1     1            0           9m11s
+mysql                  1/1     1            1           155m
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+contact-service-dep    0/1     1            0           8m32s
+football-network-dep   0/1     1            0           9m41s
+mysql                  1/1     1            1           156m
+PS C:\Users\Carlos\minikube_scripts> kubectl delete deployment contact-service-dep
+deployment.extensions "contact-service-dep" deleted
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+football-network-dep   0/1     1            0           10m
+mysql                  1/1     1            1           156m
+PS C:\Users\Carlos\minikube_scripts> kubectl delete deployment football-network-dep
+deployment.extensions "football-network-dep" deleted
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+mysql-f9b6cc99d-2qbkf   1/1     Running   0          156m
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$
+$
+$
+$ docker image
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+contact-service                           v0.4.2              7958373a23b0        18 minutes ago      103MB
+football-network                          v0.4.2              18a6a48a3e4d        18 minutes ago      127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker rmi contact-service:v0.4.2
+Untagged: contact-service:v0.4.2
+Deleted: sha256:7958373a23b09f9a41c9b599bd0f2076f91eb91aee7e7f26282578b31599c549
+Deleted: sha256:4d8e42755d4af163825395277c5b1f14ac175677c018b06dd16c57d13a06b776
+Deleted: sha256:97df672d2f89c1070b6a1f5055924b8c3ea7badf3fa1967ca75a115c02a9bd8f
+Deleted: sha256:491c44b4cc9f9d72f340c752df12be29dde3c421e94097ba74618f5a4aeaab9d
+$ docker rmi football-network:v0.4.2
+Untagged: football-network:v0.4.2
+Deleted: sha256:18a6a48a3e4d0b202318218597e0b19da85f9bbbd49172b571fc3b7e43051778
+Deleted: sha256:1a6edf4e096be8caa6efb7df98c0ad79bbcb22087724797a2e8640c6c634edc9
+Deleted: sha256:f4d16fa0b811ebf892e4da545394b0a81d125744857b9db07944e05cb7cab037
+Deleted: sha256:5137722d67d9ee7c11b4854e9c5dfd3f6fcd2e4ee4c2d1454bff09af74ad24cf
+$ docker image
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker build -t football-network:v0.4.2 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/Football-Network-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 1f6211195efc
+Step 3/4 : EXPOSE 8443
+ ---> Running in 98ee6373d3bb
+Removing intermediate container 98ee6373d3bb
+ ---> 0e7e5ccae2df
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.2-SNAPSHOT.jar"]
+ ---> Running in b2730e99660e
+Removing intermediate container b2730e99660e
+ ---> 82974c850e46
+Successfully built 82974c850e46
+Successfully tagged football-network:v0.4.2
+$ docker build -t contact-network:v0.4.2 -f DockerfileContactService
+"docker build" requires exactly 1 argument.
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+$ docker build -t contact-network:v0.4.2 -f DockerfileContactService .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 0bf6fbfa01e0
+Step 3/4 : EXPOSE 8060
+ ---> Running in 44b7e69d84ee
+Removing intermediate container 44b7e69d84ee
+ ---> a20c6f4b0647
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.2-SNAPSHOT.jar"]
+ ---> Running in 739637b4a6ff
+Removing intermediate container 739637b4a6ff
+ ---> 1d365f49c102
+Successfully built 1d365f49c102
+Successfully tagged contact-network:v0.4.2
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment contact-service-dep --image=contact-service:v0.4.2
+deployment.apps/contact-service-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep --image=football-network:v0.4.2
+deployment.apps/football-network-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-gjg7t    0/1     ImagePullBackOff    0          25s
+football-network-dep-7848fc947f-sp85v   0/1     RunContainerError   0          12s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          160m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-gjg7t    0/1     ErrImagePull        0          32s
+football-network-dep-7848fc947f-sp85v   0/1     RunContainerError   1          19s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          160m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-gjg7t    0/1     ImagePullBackOff   0          42s
+football-network-dep-7848fc947f-sp85v   0/1     CrashLoopBackOff   2          29s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          160m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS             RESTARTS   AGE
+contact-service-dep-866ccf6485-gjg7t    0/1     ImagePullBackOff   0          46s
+football-network-dep-7848fc947f-sp85v   0/1     CrashLoopBackOff   2          33s
+mysql-f9b6cc99d-2qbkf                   1/1     Running            0          160m
+PS C:\Users\Carlos\minikube_scripts> kubectl describe pod contact-service-dep-866ccf6485-gjg7t
+Name:               contact-service-dep-866ccf6485-gjg7t
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 13:56:10 +0100
+Labels:             app=contact-service-dep
+                    pod-template-hash=866ccf6485
+Annotations:        <none>
+Status:             Pending
+IP:                 172.17.0.6
+Controlled By:      ReplicaSet/contact-service-dep-866ccf6485
+Containers:
+  contact-service:
+    Container ID:
+    Image:          contact-service:v0.4.2
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  66s                default-scheduler  Successfully assigned default/contact-service-dep-866ccf6485-gjg7t to minikube
+  Normal   Pulling    25s (x3 over 65s)  kubelet, minikube  pulling image "contact-service:v0.4.2"
+  Warning  Failed     23s (x3 over 64s)  kubelet, minikube  Failed to pull image "contact-service:v0.4.2": rpc error: code = Unknown desc = Error response from daemon: pull access denied for contact-service, repository does not exist or may require 'docker login'
+  Warning  Failed     23s (x3 over 64s)  kubelet, minikube  Error: ErrImagePull
+  Normal   BackOff    11s (x3 over 63s)  kubelet, minikube  Back-off pulling image "contact-service:v0.4.2"
+  Warning  Failed     11s (x3 over 63s)  kubelet, minikube  Error: ImagePullBackOff
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl describe pod contact-service-dep-866ccf6485-gjg7t
+Name:               contact-service-dep-866ccf6485-gjg7t
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 13:56:10 +0100
+Labels:             app=contact-service-dep
+                    pod-template-hash=866ccf6485
+Annotations:        <none>
+Status:             Pending
+IP:                 172.17.0.6
+Controlled By:      ReplicaSet/contact-service-dep-866ccf6485
+Containers:
+  contact-service:
+    Container ID:
+    Image:          contact-service:v0.4.2
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  74s                default-scheduler  Successfully assigned default/contact-service-dep-866ccf6485-gjg7t to minikube
+  Normal   Pulling    33s (x3 over 73s)  kubelet, minikube  pulling image "contact-service:v0.4.2"
+  Warning  Failed     31s (x3 over 72s)  kubelet, minikube  Failed to pull image "contact-service:v0.4.2": rpc error: code = Unknown desc = Error response from daemon: pull access denied for contact-service, repository does not exist or may require 'docker login'
+  Warning  Failed     31s (x3 over 72s)  kubelet, minikube  Error: ErrImagePull
+  Normal   BackOff    5s (x4 over 71s)   kubelet, minikube  Back-off pulling image "contact-service:v0.4.2"
+  Warning  Failed     5s (x4 over 71s)   kubelet, minikube  Error: ImagePullBackOff
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+contact-network                           v0.4.2              1d365f49c102        2 minutes ago       103MB
+football-network                          v0.4.2              82974c850e46        3 minutes ago       127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker rmi contact-network
+Error: No such image: contact-network
+$ docker rmi contact-network:v0.4.2
+Untagged: contact-network:v0.4.2
+Deleted: sha256:1d365f49c102ad7ef8bf79f6bf7b8458c57c1239a9ea21d3f34675f7cc99b55a
+Deleted: sha256:a20c6f4b0647b6888a0993a54e58de892bb3180438fd792b8e8194679d75c870
+Deleted: sha256:0bf6fbfa01e0a213c0efe4c312a7e47054897426ee385f5ede6c65d0066c292c
+Deleted: sha256:f8793e2901286e4bb6e9d61658b1472d82681f8fdf77b8efc9dda9865a5c2002
+$ docker build -t contact-service:v0.4.2 -f Do[?5h[?5lckerfileContactService .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM ubuntu:latest
+ ---> 47b19964fb50
+Step 2/4 : COPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 854a61450f45
+Step 3/4 : EXPOSE 8060
+ ---> Running in f21dd6d0eef7
+Removing intermediate container f21dd6d0eef7
+ ---> 11110cb4586b
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.2-SNAPSHOT.jar"]
+ ---> Running in 822c214977e2
+Removing intermediate container 822c214977e2
+ ---> 82875550cec2
+Successfully built 82875550cec2
+Successfully tagged contact-service:v0.4.2
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts> kubectl describe pod contact-service-dep-866ccf6485-gjg7t
+Name:               contact-service-dep-866ccf6485-gjg7t
+Namespace:          default
+Priority:           0
+PriorityClassName:  <none>
+Node:               minikube/10.0.2.15
+Start Time:         Sun, 10 Mar 2019 13:56:10 +0100
+Labels:             app=contact-service-dep
+                    pod-template-hash=866ccf6485
+Annotations:        <none>
+Status:             Pending
+IP:                 172.17.0.6
+Controlled By:      ReplicaSet/contact-service-dep-866ccf6485
+Containers:
+  contact-service:
+    Container ID:
+    Image:          contact-service:v0.4.2
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-57srw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-57srw:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-57srw
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  3m40s                  default-scheduler  Successfully assigned default/contact-service-dep-866ccf6485-gjg7t to minikube
+  Normal   Pulling    2m16s (x4 over 3m39s)  kubelet, minikube  pulling image "contact-service:v0.4.2"
+  Warning  Failed     2m14s (x4 over 3m38s)  kubelet, minikube  Failed to pull image "contact-service:v0.4.2": rpc error: code = Unknown desc = Error response from daemon: pull access denied for contact-service, repository does not exist or may require 'docker login'
+  Warning  Failed     2m14s (x4 over 3m38s)  kubelet, minikube  Error: ErrImagePull
+  Warning  Failed     112s (x6 over 3m37s)   kubelet, minikube  Error: ImagePullBackOff
+  Normal   BackOff    99s (x7 over 3m37s)    kubelet, minikube  Back-off pulling image "contact-service:v0.4.2"
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-gjg7t    0/1     RunContainerError   0          3m57s
+football-network-dep-7848fc947f-sp85v   0/1     CrashLoopBackOff    5          3m44s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          163m
+PS C:\Users\Carlos\minikube_scripts> kubectl delete deployment contact-service-dep
+deployment.extensions "contact-service-dep" deleted
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment contact-service-dep --image=contact-service:v0.4.2
+deployment.apps/contact-service-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS              RESTARTS   AGE
+contact-service-dep-866ccf6485-n99xw    0/1     RunContainerError   0          2s
+football-network-dep-7848fc947f-sp85v   0/1     CrashLoopBackOff    5          4m28s
+mysql-f9b6cc99d-2qbkf                   1/1     Running             0          164m
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+mysql-f9b6cc99d-2qbkf   1/1     Running   0          166m
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment contact-service-dep --image=contact-service:v0.4.2
+deployment.apps/contact-service-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl delete deployment contact-service-dep
+deployment.extensions "contact-service-dep" deleted
+PS C:\Users\Carlos\minikube_scripts> kubectl delete deployment football-network-dep
+Error from server (NotFound): deployments.extensions "football-network-dep" not found
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileContactService docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileContactService                                                              100%  339     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> scp .\Dockerfile* docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+./Dockerfile*: Protocol not available
+PS C:\Users\Carlos\minikube_scripts> scp .\DockerfileFootballNetwork docker@192.168.99.100:/home/docker
+docker@192.168.99.100's password:
+DockerfileFootballNetwork                                                             100%  344     0.3KB/s   00:00
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mysql   1/1     1            1           175m
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+mysql-f9b6cc99d-2qbkf   1/1     Running   0          175m
+PS C:\Users\Carlos\minikube_scripts> minikube ssh
+                         _             _
+            _         _ ( )           ( )
+  ___ ___  (_)  ___  (_)| |/')  _   _ | |_      __
+/' _ ` _ `\| |/' _ `\| || , <  ( ) ( )| '_`\  /'__`\
+| ( ) ( ) || || ( ) || || |\`\ | (_) || |_) )(  ___/
+(_) (_) (_)(_)(_) (_)(_)(_) (_)`\___/'(_,__/'`\____)
+
+$ docker images
+REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
+contact-service                           v0.4.2              82875550cec2        12 minutes ago      103MB
+football-network                          v0.4.2              82974c850e46        17 minutes ago      127MB
+mysql                                     5.6                 69056560eb44        5 days ago          256MB
+ubuntu                                    latest              47b19964fb50        4 weeks ago         88.1MB
+k8s.gcr.io/kube-controller-manager        v1.13.3             0482f6400933        5 weeks ago         146MB
+k8s.gcr.io/kube-apiserver                 v1.13.3             fe242e556a99        5 weeks ago         181MB
+k8s.gcr.io/kube-proxy                     v1.13.3             98db19758ad4        5 weeks ago         80.3MB
+k8s.gcr.io/kube-scheduler                 v1.13.3             3a6f709e97a0        5 weeks ago         79.6MB
+k8s.gcr.io/kubernetes-dashboard-amd64     v1.10.1             f9aed6605b81        2 months ago        122MB
+k8s.gcr.io/coredns                        1.2.6               f59dcacceff4        4 months ago        40MB
+k8s.gcr.io/etcd                           3.2.24              3cab8e1b9802        5 months ago        220MB
+k8s.gcr.io/kube-addon-manager             v8.6                9c16409588eb        12 months ago       78.4MB
+k8s.gcr.io/pause                          3.1                 da86e6ba6ca1        14 months ago       742kB
+gcr.io/k8s-minikube/storage-provisioner   v1.8.1              4689081edb10        16 months ago       80.8MB
+$ docker rmi contact-service:v0.4.2
+Untagged: contact-service:v0.4.2
+Deleted: sha256:82875550cec2d67a035cc19b511d086180094aa681bf98f41d553eecc2440ed3
+Deleted: sha256:11110cb4586b3bc3b729eaaa71b99b998611282596f29050232ba63c19ca0e8d
+Deleted: sha256:854a61450f456d8576e07fe9ccd4fe85d604445645ac84982aecdc47081d52e1
+Deleted: sha256:32bed1c9ae99f244f225c9c0e553214cfce027048ca958c2034f8db70da17762
+$ docker rmi football-network:v0.4.2
+Untagged: football-network:v0.4.2
+Deleted: sha256:82974c850e468941e7fc7ac00c42fe432802f204a341837947729ca38e4a25ab
+Deleted: sha256:0e7e5ccae2df3093aae960471361035d8cc73449757cf9086bd145640119fcee
+Deleted: sha256:1f6211195efc99e68a29a91bec12a4dda3f66b08e83a5d0e113e53fa0533c646
+Deleted: sha256:1b0b58776c230146cd17f38b2992ad673e3a9de29f3faed988f97a7a0b2b2720
+$ docker build -t contact-service:v0.4.2 -f DockerfileContactService .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM java:openjdk-8-jre-alpine
+openjdk-8-jre-alpine: Pulling from library/java
+
+[1B15475419: Pulling fs layer
+[1Bc0aaa6fd: Pulling fs layer
+[1BDigest: sha256:6a8cbe4335d1a5711a52912b684e30d6dbfab681a6733440ff7241b05a5deefd
+Status: Downloaded newer image for java:openjdk-8-jre-alpine
+ ---> fdc893b19a14
+Step 2/4 : COPY target/ContactService-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> 4963b1282728
+Step 3/4 : EXPOSE 8060
+ ---> Running in 522c69a36364
+Removing intermediate container 522c69a36364
+ ---> 2a81c961d136
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/ContactService-0.4.2-SNAPSHOT.jar"]
+ ---> Running in 04bba03da6bf
+Removing intermediate container 04bba03da6bf
+ ---> 7c490a12c1fc
+Successfully built 7c490a12c1fc
+Successfully tagged contact-service:v0.4.2
+$ docker build -t football-network:v0.4.2 -f DockerfileFootballNetwork .
+Sending build context to Docker daemon  163.7MB
+Step 1/4 : FROM java:openjdk-8-jre-alpine
+ ---> fdc893b19a14
+Step 2/4 : COPY target/Football-Network-0.4.2-SNAPSHOT.jar /usr/src/app/
+ ---> bf61b98e5ad7
+Step 3/4 : EXPOSE 8443
+ ---> Running in 225f5ac8e9ca
+Removing intermediate container 225f5ac8e9ca
+ ---> 8df6bb76c620
+Step 4/4 : CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.2-SNAPSHOT.jar"]
+ ---> Running in e0a60c278835
+Removing intermediate container e0a60c278835
+ ---> f4efdfdf1a15
+Successfully built f4efdfdf1a15
+Successfully tagged football-network:v0.4.2
+$ exit
+logout
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment contact-service-dep --image=contact-service:v0.4.2
+deployment.apps/contact-service-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl create deployment football-network-dep --image=football-network:v0.4.2
+deployment.apps/football-network-dep created
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment football-network-dep --type=NodePort --port=8443
+service/football-network-dep exposed
+PS C:\Users\Carlos\minikube_scripts> kubectl get services
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+football-network-db    ClusterIP   None            <none>        3306/TCP         3h2m
+football-network-dep   NodePort    10.96.185.231   <none>        8443:30417/TCP   66s
+kubernetes             ClusterIP   10.96.0.1       <none>        443/TCP          13d
+PS C:\Users\Carlos\minikube_scripts> kubectl delete service football-network-dep
+service "football-network-dep" deleted
+PS C:\Users\Carlos\minikube_scripts> kubectl get services
+NAME                  TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+football-network-db   ClusterIP   None         <none>        3306/TCP   3h4m
+kubernetes            ClusterIP   10.96.0.1    <none>        443/TCP    13d
+PS C:\Users\Carlos\minikube_scripts> kubectl get deployments
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+contact-service-dep    1/1     1            1           6m18s
+football-network-dep   1/1     1            1           5m47s
+mysql                  1/1     1            1           3h4m
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment football-network-dep --name=football-network-service --ty
+pe=NodePort --port=8443
+service/football-network-service exposed
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment contact-service-dep --name=contact-service-service --type
+=NodePort
+error: couldn't find port via --port flag or introspection
+See 'kubectl expose -h' for help and examples.
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment contact-service-dep --name=contact-service-service
+error: couldn't find port via --port flag or introspection
+See 'kubectl expose -h' for help and examples.
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment contact-service-dep --name=contact-service-service --type
+=ClusterIP
+error: couldn't find port via --port flag or introspection
+See 'kubectl expose -h' for help and examples.
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts> kubectl expose deployment contact-service-dep --name=contact-service-service --type
+=ClusterIP --port=8060
+service/contact-service-service exposed
+PS C:\Users\Carlos\minikube_scripts> minikube service football-netowrk-service
+PS C:\Users\Carlos\minikube_scripts> ^C
+PS C:\Users\Carlos\minikube_scripts> minikube ip
+192.168.99.100
+PS C:\Users\Carlos\minikube_scripts> kubectl get pods
+NAME                                    READY   STATUS    RESTARTS   AGE
+contact-service-dep-866ccf6485-vfqxp    1/1     Running   0          18m
+football-network-dep-7848fc947f-dgbsp   1/1     Running   0          18m
+mysql-f9b6cc99d-2qbkf                   1/1     Running   0          3h17m
+PS C:\Users\Carlos\minikube_scripts> kubectl get services
+NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+contact-service-service    ClusterIP   10.110.246.7   <none>        8060/TCP         5m30s
+football-network-db        ClusterIP   None           <none>        3306/TCP         3h17m
+football-network-service   NodePort    10.96.89.198   <none>        8443:31708/TCP   11m
+kubernetes                 ClusterIP   10.96.0.1      <none>        443/TCP          14d
+PS C:\Users\Carlos\minikube_scripts> ping 10.96.89.198
+
+Haciendo ping a 10.96.89.198 con 32 bytes de datos:
+Tiempo de espera agotado para esta solicitud.
+Tiempo de espera agotado para esta solicitud.
+
+Estadísticas de ping para 10.96.89.198:
+    Paquetes: enviados = 2, recibidos = 0, perdidos = 2
+    (100% perdidos),
+Control-C
+PS C:\Users\Carlos\minikube_scripts> ping localhost
+
+Haciendo ping a NEGRACO [::1] con 32 bytes de datos:
+Respuesta desde ::1: tiempo<1m
+Respuesta desde ::1: tiempo<1m
+Respuesta desde ::1: tiempo<1m
+Respuesta desde ::1: tiempo<1m
+
+Estadísticas de ping para ::1:
+    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+    (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    Mínimo = 0ms, Máximo = 0ms, Media = 0ms
+PS C:\Users\Carlos\minikube_scripts> minikube service football-netowrk-service
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>
+PS C:\Users\Carlos\minikube_scripts>  kubectl get service football-netowrk-service --output='jsonpath={.spec.ports[0].no
+dePort}'
+Error from server (NotFound): services "football-netowrk-service" not found
+PS C:\Users\Carlos\minikube_scripts> minikube service football-network-service
+-   Opening kubernetes service default/football-network-service in default browser...
