@@ -17,7 +17,7 @@ RUN ls -la /usr/local/src/
 
 FROM openjdk:8-jdk
 RUN mkdir /Football-Network
-COPY --from=builder /usr/local/src/prueba_servidor/target/Football-Network-csro_latest.jar /Football-Network
+COPY --from=builder /usr/local/src/Football-Network/target/Football-Network-csro_latest.jar /Football-Network
 WORKDIR /Football-Network
 EXPOSE 8443
 CMD ["java", "-jar", "/Football-Network/Football-Network-csro_latest.jar"]
