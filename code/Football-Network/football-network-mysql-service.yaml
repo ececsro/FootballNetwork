@@ -1,32 +1,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: football-network-db
+  name: csro-football-network-db
 spec:
   ports:
   - port: 3306
   selector:
-    app: csro_mysql
+    app: csro-mysql
   clusterIP: None
 ---
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: mysql
+  name: csro-mysql
 spec:
   selector:
     matchLabels:
-      app: csro_mysql
+      app: csro-mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: csro_mysql
+        app: csro-mysql
     spec:
       containers:
       - image: mysql:5.6
-        name: mysql
+        name: csro-mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: brujula61
@@ -34,19 +34,19 @@ spec:
           value: footballnetwork
         ports:
         - containerPort: 3306
-          name: mysql
+          name: csro-mysql
         volumeMounts:
-        - name: csro_mysql-persistent-storage
+        - name: csro-mysql-persistent-storage
           mountPath: /var/lib/mysql
       volumes:
-      - name: csro_mysql-persistent-storage
+      - name: csro-mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: csro_mysql-pvc
+          claimName: csro-mysql-pvc
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: csro_mysql-pvc
+  name: csro-mysql-pvc
 spec:
   storageClassName: manual
   accessModes:
@@ -58,7 +58,7 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: csro_mysql-pv
+  name: csro-mysql-pv
   labels:
     type: local
 spec:
