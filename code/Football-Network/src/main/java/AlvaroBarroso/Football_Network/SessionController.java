@@ -48,7 +48,7 @@ public class SessionController {
 //	private String path = "https://football-network-service:8443/";
 //	private String path = "https://192.168.99.100:31708/";
 //	private String path = "https://football-network.minikube.io:8443/";
-    private String path = "http://csro-football-network:8443/";
+    private String path = "https://csro-football-network:8443/";
 
 	
 	@Autowired

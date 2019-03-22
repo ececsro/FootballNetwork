@@ -25,7 +25,7 @@ public class PlayerController {
 //		private String path = "https://football-network-service:8443/";
 //		private String path = "https://192.168.99.100:31708/";
 //		private String path = "https://football-network.minikube.io:8443/";
-		private String path = "http://csro-football-network:8443/";
+		private String path = "https://csro-football-network:8443/";
 		
 //	private String servicePath = "http://192.168.10.22:8060/";
 //	private String servicePath = "http://10.0.2.15:8060/";
