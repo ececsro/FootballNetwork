@@ -3,10 +3,10 @@
 FROM java:openjdk-8-jre-alpine 
 
 # copy files required for the app to run
-COPY target/Football-Network-0.4.2-SNAPSHOT.jar /usr/src/app/
+COPY target/Football-Network-csro_latest.jar /usr/src/app/
 
 # tell the port number the container should expose
 EXPOSE 8443
 
 # run the application
-CMD ["java", "-jar", "/usr/src/app/Football-Network-0.4.2-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/usr/src/app/Football-Network-csro_latest.jar"]
