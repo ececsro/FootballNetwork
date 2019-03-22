@@ -6,7 +6,7 @@ spec:
   ports:
   - port: 3306
   selector:
-    app: mysql
+    app: csro_mysql
   clusterIP: None
 ---
 apiVersion: apps/v1 
@@ -16,13 +16,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: csro_mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: csro_mysql
     spec:
       containers:
       - image: mysql:5.6
@@ -36,35 +36,35 @@ spec:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: mysql-persistent-storage
+        - name: csro_mysql-persistent-storage
           mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-persistent-storage
+      - name: csro_mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pvc
+          claimName: csro_mysql-pvc
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mysql-pvc
+  name: csro_mysql-pvc
 spec:
   storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
+      storage: 1Gi
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mysql-pv
+  name: csro_mysql-pv
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
