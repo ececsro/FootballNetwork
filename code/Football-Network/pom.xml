@@ -4,7 +4,7 @@
 
   <groupId>AlvaroBarroso</groupId>
   <artifactId>Football-Network</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>csro_latest</version>
   <packaging>jar</packaging>
 
   <name>Football-Network</name>

@@ -18,7 +18,12 @@ public class ScoutingController {
 		//Remote
 		//private String pathClear = "https://192.168.10.20:8060/";
 		//Local
-		private String path = "./";
+//		private String path = "./";
+//		private String path = "https://localhost:8443/";
+//		private String path = "https://192.168.56.1:8060/";
+//		private String path = "https://football-network-service:8443/";
+//		private String path = "https://192.168.99.100:31708/";
+		private String path = "https://football-network.minikube.io:8443/";
 
 	@Autowired
 	private PlayerRepository 	playerRepository;
@@ -42,7 +47,7 @@ public class ScoutingController {
 		}else {
 			removeToScouting(p, us);
 		}
-		return "redirect:" + "https://192.168.10.20/" + "player/" + id;
+		return "redirect:" + path + "player/" + id;
 		//return getPlayer(model,id);
 	}
 

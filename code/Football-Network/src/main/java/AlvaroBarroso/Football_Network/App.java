@@ -26,7 +26,7 @@ public class App
 	    Config config = new Config();
 	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 	    joinConfig.getMulticastConfig().setEnabled(false);
-	    joinConfig.getTcpIpConfig().addMember( "192.168.10.21" ).addMember( "168.192.10.24" ).setEnabled( true );
+	    joinConfig.getTcpIpConfig().addMember( "localhost" ).setEnabled( true );
 	    return config;
     }
     @Bean

@@ -19,10 +19,19 @@ public class PlayerController {
 		//Remote
 		//private String path = "https://192.168.56.1:8060/";
 		//Local
-		private String path = "./";
-		
-	private String servicePath = "http://192.168.10.22:8060/";
-	
+//		private String path = "./";
+//		private String path = "https://localhost:8443/";
+//		private String path = "https://192.168.56.1:8060/";
+//		private String path = "https://football-network-service:8443/";
+//		private String path = "https://192.168.99.100:31708/";
+		private String path = "https://football-network.minikube.io:8443/";
+
+//	private String servicePath = "http://192.168.10.22:8060/";
+//	private String servicePath = "http://10.0.2.15:8060/";
+//	private String servicePath = "http://contact-service-service:8060/";
+//	private String servicePath = "https://192.168.99.100:8060/";
+	private String servicePath = "http://football-network.minikube.io:8060/";
+
 	@Autowired
 		private PlayerRepository 	playerRepository;
 		@Autowired
@@ -57,7 +66,9 @@ public class PlayerController {
 	    	/*String body = "Hola";
 	    	String to = playerRepository.getOne(id).getUser().getEmail();
 	    	smtpMailSender.send(to, "This is a test email", body);*/
-			return "redirect:" + "https://192.168.10.20/" + "player/" + id;
+	    	
+//			return "redirect:" + "https://192.168.10.20/" + "player/" + id;
+			return "redirect:" + path + "player/" + id;
 	    }
 		
     @GetMapping(value = "/player/{id}")
